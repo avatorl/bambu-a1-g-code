@@ -22,7 +22,9 @@ Select new preset for printing:
 
 Print a multi-color model with as many filament changes as you're comfortable handling.
 
-When paused, pull out the filament, push in the new filament, press continue. There is no need to use the built-in Unload and Load procedures - **just pull out, push in, continue**.
+When paused, **pull out** the filament, **push in** the new filament, press **continue**.
+
+There is no need to use the built-in Unload and Load procedures - just pull out, push in, continue.
 
 _Tested on a 3D-map model with 9 filament changes._
 
