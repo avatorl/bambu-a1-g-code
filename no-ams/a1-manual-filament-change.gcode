@@ -23,24 +23,78 @@ M400 U1                                   ; Custom Bambu G-code: pause and wait 
 
 
 {if next_extruder == 1}                   ; filament # 1
-
+;
+;music_long: 2
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+;Tick 200, Time 2 sec
+M73 P100 R0
+M1006 E25 F200 N35 
+M1006 W
+M18
 {endif}
 
     
 {if next_extruder == 2}                  ; filament # 2
-
+;
+;music_long: 4
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+;Tick 200, Time 2 sec
+M73 P50 R0
+M1006 E25 F200 N35 
+;Tick 400, Time 4 sec
+M73 P100 R0
+M1006 E37 F200 N31 
+M1006 W
+M18
 {endif}
 
 {if next_extruder == 3}                  ; filament # 3
 ;
-;music_long: 8
-
+;music_long: 6
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+;Tick 200, Time 2 sec
+M73 P33 R0
+M1006 E25 F200 N35 
+;Tick 400, Time 4 sec
+M73 P66 R0
+M1006 E37 F200 N31 
+;Tick 600, Time 6 sec
+M73 P100 R0
+M1006 E25 F200 N35 
+M1006 W
+M18
 {endif}
 
 {if next_extruder == 4}                  ; filament # 4
 ;
-;music_long: 12
-
+;music_long: 8
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+;Tick 200, Time 2 sec
+M73 P25 R0
+M1006 E25 F200 N35 
+;Tick 400, Time 4 sec
+M73 P50 R0
+M1006 E37 F200 N31 
+;Tick 600, Time 6 sec
+M73 P75 R0
+M1006 E25 F200 N35 
+;Tick 800, Time 8 sec
+M73 P100 R0
+M1006 E37 F200 N31 
+M1006 W
+M18
 {endif}
 
 {if next_extruder == 5}                  ; filament # 5
