@@ -15,6 +15,158 @@ G1 X260 F6000                             ; Move back to X=260 at moderate speed
 
 M400                                      ; Wait for all moves to finish
 
+; move to the center =======================================================
+
+G1 X128 F20000                            ; Rapid move to the center (X=128)
+
+M400                                      ; Wait for all moves to finish
+
+; play sound and pause ====================================================
+
+M17                                      ; Enable Steppers
+M400 S1                                  ; wait 1 sec
+M1006 S1
+M1006 A0 B0 L100 C37 D10 M100 E37 F10 N100
+M1006 A0 B0 L100 C41 D10 M100 E41 F10 N100
+M1006 A0 B0 L100 C44 D10 M100 E44 F10 N100
+M1006 A0 B10 L100 C0 D10 M100 E0 F10 N100
+M1006 A43 B10 L100 C39 D10 M100 E46 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A0 B0 L100 C39 D10 M100 E43 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A0 B0 L100 C41 D10 M100 E41 F10 N100
+M1006 A0 B0 L100 C44 D10 M100 E44 F10 N100
+M1006 A0 B0 L100 C49 D10 M100 E49 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A44 B10 L100 C39 D10 M100 E48 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A0 B0 L100 C39 D10 M100 E44 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A43 B10 L100 C39 D10 M100 E46 F10 N100
+M1006 W
+
+M400 U1                                   ; PAUSE and wait for user interaction
+
+; filament #1 =======================================================
+
+{if next_extruder == 1}
+;
+;music_long: 0
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 E37 F100 N31 
+M1006 W
+{end if}
+
+; filament #2 =======================================================
+
+{if next_extruder == 2}
+;
+;music_long: 1
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 E37 F100 N31 
+;Tick 100, Time 1 sec
+M73 P100 R0
+M1006 E48 F100 N31 
+M1006 W
+{end if}
+
+; filament #3 =======================================================
+
+{if next_extruder == 3}
+;
+;music_long: 2
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 E37 F100 N31 
+;Tick 100, Time 1 sec
+M73 P50 R0
+M1006 E48 F100 N31 
+;Tick 200, Time 2 sec
+M73 P100 R0
+M1006 E37 F100 N31 
+M1006 W
+{end if}
+
+; filament #4 =======================================================
+
+{if next_extruder == 4}
+;
+;music_long: 3
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 E37 F100 N31 
+;Tick 100, Time 1 sec
+M73 P33 R0
+M1006 E48 F100 N31 
+;Tick 200, Time 2 sec
+M73 P66 R0
+M1006 E37 F100 N31 
+;Tick 300, Time 3 sec
+M73 P100 R0
+M1006 E48 F100 N31 
+M1006 W
+{end if}
+
+; filament #5 =======================================================
+
+{if next_extruder == 5}
+;
+;music_long: 4
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 E37 F100 N31 
+;Tick 100, Time 1 sec
+M73 P25 R0
+M1006 E48 F100 N31 
+;Tick 200, Time 2 sec
+M73 P50 R0
+M1006 E37 F100 N31 
+;Tick 300, Time 3 sec
+M73 P75 R0
+M1006 E48 F100 N31 
+;Tick 400, Time 4 sec
+M73 P100 R0
+M1006 E37 F100 N31 
+M1006 W
+{end if}
+
+; filament 6 =======================================================
+
+{if next_extruder == 6}
+;
+;music_long: 4
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 E37 F100 N31 
+;Tick 100, Time 1 sec
+M73 P25 R0
+M1006 E48 F100 N31 
+;Tick 200, Time 2 sec
+M73 P50 R0
+M1006 E37 F100 N31 
+;Tick 300, Time 3 sec
+M73 P75 R0
+M1006 E48 F100 N31 
+;Tick 400, Time 4 sec
+M73 P100 R0
+M1006 E37 F100 N31 
+M1006 W
+{end if}
+
 ; move to the left ========================================================
 
 G1 X-35 F20000                            ; Rapid move to the left (X=-35)
