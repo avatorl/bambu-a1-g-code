@@ -143,9 +143,6 @@ M1006 W
 M18
 {endif}
 
-; PAUSE: wait for user
-M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
-
 ; END OF SOUND NOTIFICATION ==============
 
 ; move to the left
@@ -159,7 +156,7 @@ G1 E-100 F1000                            ; Retract (unload) 100 mm of filament 
 
 M400                                      ; Wait for retraction to complete
 
-; wait for user
+; PAUSE: wait for user
 M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
 
 ; set temp
