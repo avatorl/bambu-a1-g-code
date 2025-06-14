@@ -15,7 +15,34 @@ M400                                      ; Wait for all moves to finish (buffer
 ; SOUND NOTIFICATION =====================
 
 G1 X128 F20000                            ; Move to X=128 (middle point)
-M400                                      ; Wait for all moves to finish
+
+; Sound notification about pause
+;
+;music_long: 8
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 C13 D200 M69 
+;Tick 200, Time 2 sec
+M73 P25 R0
+M1006 C25 D200 M35 
+;Tick 400, Time 4 sec
+M73 P50 R0
+M1006 C37 D200 M69 
+;Tick 600, Time 6 sec
+M73 P75 R0
+M1006 C49 D200 M52 
+;Tick 800, Time 8 sec
+M73 P100 R0
+M1006 C61 D200 M69 
+M1006 W
+M18
+
+; wait for user
+M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
+
+; Sound notification about filament # to load
 
 {if next_extruder == 0}                   ; filament # 1
 ;
@@ -118,9 +145,6 @@ M18
 {endif}
 
 ; END OF SOUND NOTIFICATION ==============
-
-; wait for user
-M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
 
 ; move to the left
 G1 X-35 F20000                            ; Rapid move to the left (X=-35)
