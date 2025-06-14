@@ -12,16 +12,10 @@ G1 X260 F6000                             ; Move back to X=260 at moderate speed
 
 M400                                      ; Wait for all moves to finish (buffer flush)
 
-; move to the left
-G1 X-35 F20000                            ; Rapid move to the left (X=-35)
-G1 X-48 F600                              ; Slow move further left (X=-48) for precise positioning
+; SOUND NOTIFICATION
 
-M400                                      ; Wait for moves to finish
-
-; unload
-G1 E-100 F1000                            ; Retract (unload) 100 mm of filament at 1000 mm/min
-
-M400                                      ; Wait for retraction to complete
+G1 X128 F20000
+M400
 
 {if next_extruder == 1}
 ; filament slot #1
@@ -244,6 +238,19 @@ M1006 C18 D200 M24 E0 F200
 M1006 W
 M18
 {endif}
+
+; END OF SOUND NOTIFICATION
+
+; move to the left
+G1 X-35 F20000                            ; Rapid move to the left (X=-35)
+G1 X-48 F600                              ; Slow move further left (X=-48) for precise positioning
+
+M400                                      ; Wait for moves to finish
+
+; unload
+G1 E-100 F1000                            ; Retract (unload) 100 mm of filament at 1000 mm/min
+
+M400                                      ; Wait for retraction to complete
 
 ; wait for user
 M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
