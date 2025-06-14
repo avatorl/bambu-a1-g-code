@@ -22,11 +22,11 @@
 
 2. Start printing a multicolor model with as many filament changes as you're comfortable handling manually.
 
-3. Wait for the pause. **Pull out** the filament, click Resume, **push in** the new filament. 
+3. Wait for the pause. **Pull out** the filament, **push in** the new filament, click Resume.
 
-There is no need to use the built-in Unload and Load procedures - just pull out, push in, resume.
+There is no need to use the built-in Unload and Load procedures - just pull out, resume, push in.
 
-Repeat step 3 as many times as required.
+Repeat step 3 for each pause.
 
 ---
 
