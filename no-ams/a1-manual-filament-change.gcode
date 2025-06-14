@@ -12,17 +12,12 @@ G1 X260 F6000                             ; Move back to X=260 at moderate speed
 
 M400                                      ; Wait for all moves to finish (buffer flush)
 
-; PAUSE AND SOUND NOTIFICATION ===========
+; SOUND NOTIFICATION =====================
 
 G1 X128 F20000                            ; Move to X=128 (middle point)
 M400                                      ; Wait for all moves to finish
 
-; wait for user
-M117 Insert filament next_extruder and press Resume
-M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
-
-
-{if next_extruder == 1}                   ; filament # 1
+{if next_extruder == 0}                   ; filament # 1
 ;
 ;music_long: 2
 M17
@@ -36,8 +31,7 @@ M1006 W
 M18
 {endif}
 
-    
-{if next_extruder == 2}                  ; filament # 2
+{if next_extruder == 1}                  ; filament # 2
 ;
 ;music_long: 4
 M17
@@ -54,7 +48,7 @@ M1006 W
 M18
 {endif}
 
-{if next_extruder == 3}                  ; filament # 3
+{if next_extruder == 2}                  ; filament # 3
 ;
 ;music_long: 6
 M17
@@ -74,7 +68,7 @@ M1006 W
 M18
 {endif}
 
-{if next_extruder == 4}                  ; filament # 4
+{if next_extruder == 3}                  ; filament # 4
 ;
 ;music_long: 8
 M17
@@ -97,7 +91,7 @@ M1006 W
 M18
 {endif}
 
-{if next_extruder == 5}                  ; filament # 5
+{if next_extruder == 4}                  ; filament # 5
 ;
 ;music_long: 10
 M17
@@ -123,7 +117,10 @@ M1006 W
 M18
 {endif}
 
-; END OF PAUSE AND SOUND NOTIFICATION ====
+; END OF SOUND NOTIFICATION ==============
+
+; wait for user
+M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
 
 ; move to the left
 G1 X-35 F20000                            ; Rapid move to the left (X=-35)
