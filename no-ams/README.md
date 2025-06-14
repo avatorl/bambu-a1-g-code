@@ -31,3 +31,7 @@ Repeat step 3 for each pause.
 ---
 
 Tested on a 3D-map model with 9 filament changes.
+
+---
+
+Original Code: https://github.com/steven52880/bambu-a1-manual-filamant-change
