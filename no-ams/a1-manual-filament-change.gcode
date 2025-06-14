@@ -4,7 +4,7 @@ M104 S[nozzle_temperature_range_high]     ; Set nozzle temperature to high range
 ; move up
 G1 Z{max_layer_z + 10} F1200              ; Move Z-axis up by 10 mm above the highest print layer at 1200 mm/min
 
-; move to the right and cutd
+; move to the right and cut
 G1 X260 F20000                            ; Fast move to X=260 at 20000 mm/min (move to right side)
 G1 X278 F400                              ; Slow move to X=278 (move to cutter position)
 G1 X281 E-5 F80                           ; Extrude reverse 5 mm of filament (retract/cut) while moving to X=281
