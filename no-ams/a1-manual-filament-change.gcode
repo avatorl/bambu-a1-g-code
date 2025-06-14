@@ -40,8 +40,9 @@ M73 P100 R0
 M1006 C37 D50 M69 
 M1006 W
 M18
+{endif}
 
-{else if next_extruder == 2}
+{if next_extruder == 2}
 ; filament slot #2
 M17
 M400 S1
@@ -70,8 +71,9 @@ M73 P100 R0
 M1006 C37 D50 M69 
 M1006 W
 M18
+{endif}
 
-{else if next_extruder == 3}
+{if next_extruder == 3}
 ; filament slot #3
 M17
 M400 S1
@@ -112,9 +114,9 @@ M73 P100 R0
 M1006 C37 D50 M69 
 M1006 W
 M18
+{endif}
 
-
-{else if next_extruder == 4}
+{if next_extruder == 4}
 ; filament slot #4
 M17
 M400 S1
@@ -167,8 +169,9 @@ M73 P100 R0
 M1006 C37 D50 M69 
 M1006 W
 M18
+{endif}
 
-{else if next_extruder == 5}
+{if next_extruder == 5}
 ;music_long: 24
 M17
 M400 S1
@@ -233,7 +236,6 @@ M73 P100 R0
 M1006 C37 D50 M69 
 M1006 W
 M18
-
 {endif}
 
 ; wait for user
