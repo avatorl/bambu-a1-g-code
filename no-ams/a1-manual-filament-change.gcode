@@ -23,7 +23,6 @@ M17
 M400 S1
 M1006 S1
 M1006 L70 M70 N99
-M1006 C13 D200 M69 
 ;Tick 200, Time 2 sec
 M73 P25 R0
 M1006 C25 D200 M35 
@@ -39,7 +38,7 @@ M1006 C61 D200 M69
 M1006 W
 M18
 
-; wait for user
+; PAUSE: wait for user
 M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
 
 ; Sound notification about filament # to load
@@ -143,6 +142,9 @@ M1006 E25 F200 N35
 M1006 W
 M18
 {endif}
+
+; PAUSE: wait for user
+M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
 
 ; END OF SOUND NOTIFICATION ==============
 
