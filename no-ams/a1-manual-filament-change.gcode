@@ -23,6 +23,219 @@ G1 E-100 F1000                            ; Retract (unload) 100 mm of filament 
 
 M400                                      ; Wait for retraction to complete
 
+{if next_extruder == 1}
+; filament slot #1
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 C37 D50 M69 
+M1006 C0 D950 
+;Tick 1000, Time 10 sec
+M73 P50 R0
+M1006 C37 D50 M69 
+M1006 C0 D950 
+;Tick 2000, Time 20 sec
+M73 P100 R0
+M1006 C37 D50 M69 
+M1006 W
+M18
+
+{else if next_extruder == 2}
+; filament slot #2
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 100, Time 1 sec
+M73 P4 R0
+M1006 C37 D50 M69 
+M1006 C0 D850 
+;Tick 1000, Time 10 sec
+M73 P47 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1100, Time 11 sec
+M73 P52 R0
+M1006 C37 D50 M69 
+M1006 C0 D850 
+;Tick 2000, Time 20 sec
+M73 P95 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2100, Time 21 sec
+M73 P100 R0
+M1006 C37 D50 M69 
+M1006 W
+M18
+
+{else if next_extruder == 3}
+; filament slot #3
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 100, Time 1 sec
+M73 P4 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 200, Time 2 sec
+M73 P9 R0
+M1006 C37 D50 M69 
+M1006 C0 D750 
+;Tick 1000, Time 10 sec
+M73 P45 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1100, Time 11 sec
+M73 P50 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1200, Time 12 sec
+M73 P54 R0
+M1006 C37 D50 M69 
+M1006 C0 D750 
+;Tick 2000, Time 20 sec
+M73 P90 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2100, Time 21 sec
+M73 P95 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2200, Time 22 sec
+M73 P100 R0
+M1006 C37 D50 M69 
+M1006 W
+M18
+
+
+{else if next_extruder == 4}
+; filament slot #4
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 100, Time 1 sec
+M73 P4 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 200, Time 2 sec
+M73 P8 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 300, Time 3 sec
+M73 P13 R0
+M1006 C37 D50 M69 
+M1006 C0 D650 
+;Tick 1000, Time 10 sec
+M73 P43 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1100, Time 11 sec
+M73 P47 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1200, Time 12 sec
+M73 P52 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1300, Time 13 sec
+M73 P56 R0
+M1006 C37 D50 M69 
+M1006 C0 D650 
+;Tick 2000, Time 20 sec
+M73 P86 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2100, Time 21 sec
+M73 P91 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2200, Time 22 sec
+M73 P95 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2300, Time 23 sec
+M73 P100 R0
+M1006 C37 D50 M69 
+M1006 W
+M18
+
+{else if next_extruder == 5}
+;music_long: 24
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 100, Time 1 sec
+M73 P4 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 200, Time 2 sec
+M73 P8 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 300, Time 3 sec
+M73 P12 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 400, Time 4 sec
+M73 P16 R0
+M1006 C37 D50 M69 
+M1006 C0 D550 
+;Tick 1000, Time 10 sec
+M73 P41 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1100, Time 11 sec
+M73 P45 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1200, Time 12 sec
+M73 P50 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1300, Time 13 sec
+M73 P54 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 1400, Time 14 sec
+M73 P58 R0
+M1006 C37 D50 M69 
+M1006 C0 D550 
+;Tick 2000, Time 20 sec
+M73 P83 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2100, Time 21 sec
+M73 P87 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2200, Time 22 sec
+M73 P91 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2300, Time 23 sec
+M73 P95 R0
+M1006 C37 D50 M69 
+M1006 C0 D50 
+;Tick 2400, Time 24 sec
+M73 P100 R0
+M1006 C37 D50 M69 
+M1006 W
+M18
+
+{endif}
+
 ; wait for user
 M400 U1                                   ; Custom Bambu G-code: pause and wait for user interaction
 
