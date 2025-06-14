@@ -31,5 +31,3 @@ Repeat step 3 as many times as required.
 ---
 
 Tested on a 3D-map model with 9 filament changes.
-
-
