@@ -45,100 +45,117 @@ M400 U1                                   ; Custom Bambu G-code: pause and wait 
 
 {if next_extruder == 0}                   ; filament # 1
 ;
-;music_long: 2
+;music_long: 0
 M17
 M400 S1
 M1006 S1
 M1006 L70 M70 N99
-;Tick 200, Time 2 sec
-M73 P100 R0
-M1006 E25 F200 N35 
+M1006 C25 D200 M35 
 M1006 W
 M18
 {endif}
 
 {if next_extruder == 1}                  ; filament # 2
 ;
-;music_long: 4
+;music_long: 2
 M17
 M400 S1
 M1006 S1
 M1006 L70 M70 N99
+M1006 C25 D200 M35 
 ;Tick 200, Time 2 sec
-M73 P50 R0
-M1006 E25 F200 N35 
-;Tick 400, Time 4 sec
 M73 P100 R0
-M1006 E37 F200 N31 
+M1006 C37 D200 M69 
 M1006 W
 M18
 {endif}
 
 {if next_extruder == 2}                  ; filament # 3
 ;
-;music_long: 6
+;music_long: 4
 M17
 M400 S1
 M1006 S1
 M1006 L70 M70 N99
+M1006 C25 D200 M35 
 ;Tick 200, Time 2 sec
-M73 P33 R0
-M1006 E25 F200 N35 
+M73 P50 R0
+M1006 C37 D200 M69 
 ;Tick 400, Time 4 sec
-M73 P66 R0
-M1006 E37 F200 N31 
-;Tick 600, Time 6 sec
 M73 P100 R0
-M1006 E25 F200 N35 
+M1006 C25 D200 M35 
 M1006 W
 M18
 {endif}
 
 {if next_extruder == 3}                  ; filament # 4
 ;
-;music_long: 8
+;music_long: 6
 M17
 M400 S1
 M1006 S1
 M1006 L70 M70 N99
+M1006 C25 D200 M35 
 ;Tick 200, Time 2 sec
-M73 P25 R0
-M1006 E25 F200 N35 
+M73 P33 R0
+M1006 C37 D200 M69 
 ;Tick 400, Time 4 sec
-M73 P50 R0
-M1006 E37 F200 N31 
+M73 P66 R0
+M1006 C25 D200 M35 
 ;Tick 600, Time 6 sec
-M73 P75 R0
-M1006 E25 F200 N35 
-;Tick 800, Time 8 sec
 M73 P100 R0
-M1006 E37 F200 N31 
+M1006 C37 D200 M69 
 M1006 W
 M18
 {endif}
 
 {if next_extruder == 4}                  ; filament # 5
 ;
+;music_long: 8
+M17
+M400 S1
+M1006 S1
+M1006 L70 M70 N99
+M1006 C25 D200 M35 
+;Tick 200, Time 2 sec
+M73 P25 R0
+M1006 C37 D200 M69 
+;Tick 400, Time 4 sec
+M73 P50 R0
+M1006 C25 D200 M35 
+;Tick 600, Time 6 sec
+M73 P75 R0
+M1006 C37 D200 M69 
+;Tick 800, Time 8 sec
+M73 P100 R0
+M1006 C25 D200 M35 
+M1006 W
+M18
+{endif}
+
+{if next_extruder == 5}                  ; filament # 6
+;
 ;music_long: 10
 M17
 M400 S1
 M1006 S1
 M1006 L70 M70 N99
+M1006 C25 D200 M35 
 ;Tick 200, Time 2 sec
 M73 P20 R0
-M1006 E25 F200 N35 
+M1006 C37 D200 M69 
 ;Tick 400, Time 4 sec
 M73 P40 R0
-M1006 E37 F200 N31 
+M1006 C25 D200 M35 
 ;Tick 600, Time 6 sec
 M73 P60 R0
-M1006 E25 F200 N35 
+M1006 C37 D200 M69 
 ;Tick 800, Time 8 sec
 M73 P80 R0
-M1006 E37 F200 N31 
+M1006 C25 D200 M35 
 ;Tick 1000, Time 10 sec
 M73 P100 R0
-M1006 E25 F200 N35 
+M1006 C37 D200 M69 
 M1006 W
 M18
 {endif}
