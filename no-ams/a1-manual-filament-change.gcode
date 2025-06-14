@@ -12,7 +12,7 @@ G1 X260 F6000                             ; Move back to X=260 at moderate speed
 
 M400                                      ; Wait for all moves to finish (buffer flush)
 
-; SOUND NOTIFICATION
+; PAUSE AND SOUND NOTIFICATION ===========
 
 G1 X128 F20000                            ; Move to X=128 (middle point)
 M400                                      ; Wait for all moves to finish
@@ -123,7 +123,7 @@ M1006 W
 M18
 {endif}
 
-; END OF SOUND NOTIFICATION
+; END OF PAUSE AND SOUND NOTIFICATION ====
 
 ; move to the left
 G1 X-35 F20000                            ; Rapid move to the left (X=-35)
