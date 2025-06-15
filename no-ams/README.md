@@ -16,21 +16,21 @@
 
 ## Print a Model using the Preset
 
-1. Select new preset for printing:
+1. Select the preset for printing:
 
 ![image](https://github.com/user-attachments/assets/89e483ac-0636-4304-848d-033257718826)
 
 2. Start printing a multicolor model with as many filament changes as you're comfortable handling manually.
 
-3. Wait for the pause. **Pull out** the filament, **push in** the new filament, click Resume.
+3. Wait for the pause. _If "Allow Prompt Sound" is enabled in Print Options, you will be notified of a pause by a sound._
+  
+4. **Pull out** the filament, **push in** the next filament, click **Resume Printing**.
 
-There is no need to use the built-in Unload and Load procedures - just pull out, resume, push in.
+There is no need to use the built-in Unload and Load procedures - just pull out, push in, resume printing.
 
-Repeat step 3 for each pause.
+_See in the slicer on the "Preview" tab (using the horizontal and vertical sliders) which color should be loaded after each pause._
 
----
-
-Tested on a 3D-map model with 9 filament changes.
+Repeat steps 3-4 for each pause.
 
 ---
 
