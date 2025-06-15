@@ -54,63 +54,9 @@ M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
 M1006 A43 B10 L100 C39 D10 M100 E46 F10 N100
 M1006 W
 
-; move to the right to tell filament slot # (see in the slicer) ===========
-; number of screws visible on the left side of the toolhead during the pause = filament slot #
-
-{if next_extruder == 0}
-  G1 X-10 F1000
-{endif}
-
-{if next_extruder == 1}
-  G1 X15 F2000
-{endif}
-
-{if next_extruder == 2}
-  G1 X40 F3000
-{endif}
-
-{if next_extruder == 3}
-  G1 X65 F4000
-{endif}
-
-{if next_extruder == 4}
-  G1 X90 F5000
-{endif}
-
-{if next_extruder == 5}
-  G1 X115 F10000
-{endif}
-
-{if next_extruder == 6}
-  G1 X140 F10000
-{endif}
-
-{if next_extruder == 7}
-  G1 X165 F10000
-{endif}
-
-{if next_extruder == 8}
-  G1 X190 F10000
-{endif}
-
-{if next_extruder == 9}
-  G1 X215 F10000
-{endif}
-
-{if next_extruder == 10}
-  G1 X240 F10000
-{endif}
-
 ; wait for user ===========================================================
 
 M400 U1                                   ; PAUSE and wait for user interaction
-
-; move to the left ========================================================
-
-G1 X-35 F20000                            ; Rapid move to the left (X=-35)
-G1 X-48 F600                              ; Slow move further left (X=-48) for precise positioning
-
-M400                                      ; Wait for moves to finish
 
 ; load new filament =======================================================
 
