@@ -1,5 +1,7 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
+; https://github.com/avatorl/bambu-a1-g-code/tree/main/no-ams
+; 2025-06-15
 ; =========================================================================
 
 M104 S[nozzle_temperature_range_high]     ; Set nozzle temperature to high range (starts heating but doesn't wait)
