@@ -28,6 +28,30 @@ G1 E-100 F1000                            ; Retract (unload) 100 mm of filament 
 
 M400                                      ; Wait for retraction to complete
 
+; play sound ==============================================================
+
+M17                                      ; Enable Steppers
+M400 S1                                  ; wait 1 sec
+M1006 S1
+M1006 A0 B0 L100 C37 D10 M100 E37 F10 N100
+M1006 A0 B0 L100 C41 D10 M100 E41 F10 N100
+M1006 A0 B0 L100 C44 D10 M100 E44 F10 N100
+M1006 A0 B10 L100 C0 D10 M100 E0 F10 N100
+M1006 A43 B10 L100 C39 D10 M100 E46 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A0 B0 L100 C39 D10 M100 E43 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A0 B0 L100 C41 D10 M100 E41 F10 N100
+M1006 A0 B0 L100 C44 D10 M100 E44 F10 N100
+M1006 A0 B0 L100 C49 D10 M100 E49 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A44 B10 L100 C39 D10 M100 E48 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A0 B0 L100 C39 D10 M100 E44 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A43 B10 L100 C39 D10 M100 E46 F10 N100
+M1006 W
+
 ; wait for user ===========================================================
 
 M400 U1                                   ; PAUSE and wait for user interaction
