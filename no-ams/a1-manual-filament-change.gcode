@@ -68,7 +68,7 @@ M400                                      ; Wait for extrusion to complete
 
 ; poop ====================================================================
 
-M106 P1 S178                              ; Turn on fan P1 at speed 178 (likely part cooling fan)
+M106 P1 S178                              ; Turn on fan P1 at speed 178
 M400 S3                                   ; Wait 3 seconds
 
 G1 X-38.2 F18000                          ; Fast move to start of poop path (X=-38.2)
