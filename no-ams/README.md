@@ -49,6 +49,8 @@ Repeat steps 3-4 for each pause.
 
 ---
 
-❗ I believe the same K-factor (K-factor of the initial filament) is used for all following filaments.
-
 ❗ Re-slicing, even without any changes in printing settings, may change filament change order.
+
+---
+
+❗WARNING! This is unofficial G-code. It is not authorized, endorsed, or supported by Bambu Lab. The author is not responsible for any negative consequences resulting from the use of this code, including but not limited to filament waste, printing task failure, or printer damage.
