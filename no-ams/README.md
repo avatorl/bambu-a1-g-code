@@ -40,11 +40,13 @@ For example, M1020 S5 means filament #6 (red color) on this screenshot:
 
 ![image](https://github.com/user-attachments/assets/4ba6c987-1c45-41ec-b10a-5d344758ebcc)
 
+Repeat steps 3-4 for each pause.
+
+---
+
 ❗ I believe the same K-factor (initial filament) is used for all following filaments.
 
 ❗ Re-slicing, even without any changes in printing settings, may change filament change order.
-
-Repeat steps 3-4 for each pause.
 
 ---
 
