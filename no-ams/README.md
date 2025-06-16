@@ -34,6 +34,8 @@ How can I know which color to load?
 
 ➡️ Option 2: Export sliced file, extract and open g-code file and search for all "M1020 S" commands. M1020 S0 - change to filament #1, M1020 S1 - change to filament #2, and so on.
 
+For example, M1020 S5 means filament #6 (red color) on this screenshot:
+
 ![image](https://github.com/user-attachments/assets/4ba6c987-1c45-41ec-b10a-5d344758ebcc)
 
 ❗ I believe the same K-factor (initial filament) is used for all following filaments.
