@@ -10,7 +10,7 @@ This method allows multi-color printing without using the AMS. It supports model
 
 2. Copy g-code and paste into **Change filament G-code** field of the **Machine gcode** tab (replace any code existing in the field).
 
-➡️ [G-code version 1](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change.gcode) (no additional flushing, no flow dynamics calibration - fast filament change).
+➡️ [G-code version 1](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change.gcode) (no additional flushing, no flow dynamics calibration - faster filament change).
 
 ➡️ [G-code version 2](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change-v2.gcode) (flushing, flow dynamics calibration - higher print quality).
 
