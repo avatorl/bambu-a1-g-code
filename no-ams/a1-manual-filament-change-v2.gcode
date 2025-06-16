@@ -1,10 +1,7 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Version: 2, based on the original AMS version A1 20250206
+; Version 2, based on the original AMS version A1 20250206 and Version 1
 ; GitHub: https://github.com/avatorl/bambu-a1-g-code/tree/main/no-ams
-; Comments:
-; 	Inline comments are partially AI-generated and may be incorrect
-; 	!!! WARNING !!! EXPERIMETAL VERSION !!! NOT YET TESTED !!!
 ; ========================================================================
 
 ; initialization
@@ -77,7 +74,7 @@ M400 U1                                   ; PAUSE and wait for user interaction
 
 M109 S[nozzle_temperature_range_high]     ; Set nozzle temperature and wait until it reaches target
 
-G1 E200 F500                              ; Load filament into nozzle
+  G1 E200 F500                            ; Load 200 mm of filament into nozzle at 500 mm/min
 
 M400                                      ; Wait for extrusion to complete
 
