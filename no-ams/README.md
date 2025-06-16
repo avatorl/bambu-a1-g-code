@@ -28,7 +28,13 @@
 
 There is no need to use the built-in Unload and Load procedures - just pull out, push in, resume printing.
 
-_See in the slicer on the "Preview" tab (using the horizontal and vertical sliders) which color should be loaded after each pause._
+➡️ Option 1: See in the slicer on the "Preview" tab (using the horizontal and vertical sliders) which color should be loaded after each pause.
+
+➡️ Option 2: Export g-code and search for all M1020 S commands. M1020 S0 - change to filament #1, M1020 S1 - change to filament #2, and so on.
+
+![image](https://github.com/user-attachments/assets/4ba6c987-1c45-41ec-b10a-5d344758ebcc)
+
+!!! Re-slicing, even without any changes in printing settings, may change filament change order.
 
 Repeat steps 3-4 for each pause.
 
