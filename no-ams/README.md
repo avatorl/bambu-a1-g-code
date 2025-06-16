@@ -53,4 +53,4 @@ Repeat steps 3-4 for each pause.
 
 ---
 
-❗WARNING! This is unofficial G-code. It is not authorized, endorsed, or supported by Bambu Lab. The author is not responsible for any negative consequences resulting from the use of this code, including but not limited to filament waste, printing task failure, or printer damage.
+❗WARNING! This is unofficial G-code. It is not authorized, endorsed, or supported by Bambu Lab. The author is not responsible for any negative consequences resulting from the use of this code, including but not limited to filament waste, printing task failure, or printer damage. I may also be wrong about what the code does and doesn't do, including possibly incorrect comments in the code or on this page. Use with caution at your own responsibility.
