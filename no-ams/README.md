@@ -2,7 +2,7 @@
 
 ## Create Printer Preset
 
-1. Click to edit **printer settings preset**:
+1. In Bambu Studio click this button to edit **printer settings preset**:
 
 ![image](https://github.com/user-attachments/assets/cba181f0-c58c-4677-b402-d3094aaf58bf)
 
@@ -22,9 +22,11 @@
 
 2. Start printing a multicolor model with as many filament changes as you're comfortable handling manually.
 
-3. Wait for the pause. _If "Allow Prompt Sound" is enabled in Print Options, you will be notified of a pause by a sound._
+   This method works well for flat models (e.g., keychains, signs, labels) or for models where multi-color printing is required only on the bottom and/or top surfaces.
+
+4. Wait for the pause. _If "Allow Prompt Sound" is enabled in Print Options, you will be notified of a pause by a sound._
   
-4. **Pull out** the filament, **push in** the next filament, click **Resume Printing**.
+5. **Pull out** the filament, **push in** the next filament, click **Resume Printing**.
 
 There is no need to use the built-in Unload and Load procedures - just pull out, push in, resume printing.
 
