@@ -8,9 +8,9 @@
 
 2. Copy g-code and paste into **Change filament G-code** field of the **Machine gcode** tab (replace any code existing in the field).
 
-➡️ G-code version 1 (no flushing, no dynamic flow calibration - fast change): [no-ams/a1-manual-filament-change-v2.gcode](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change.gcode)
+➡️ G-code version 1 (no flushing, no flow dynamics calibration - fast change): [no-ams/a1-manual-filament-change-v2.gcode](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change.gcode)
 
-➡️ G-code version 2 (flushing, dynamic flow calibration - print quality): [a1-manual-filament-change-v2.gcode](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change-v2.gcode
+➡️ G-code version 2 (flushing, flow dynamics calibration - print quality): [a1-manual-filament-change-v2.gcode](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change-v2.gcode
 )
 
 
