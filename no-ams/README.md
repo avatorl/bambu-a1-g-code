@@ -28,7 +28,7 @@
 
 There is no need to use the built-in Unload and Load procedures - just pull out, push in, resume printing.
 
-_??? How to enable Flow Dynamics Calibration_
+❗ I believe the same K-factor (initial filament) is used for all following filaments.
 
 ➡️ Option 1: See in the slicer on the "Preview" tab (using the horizontal and vertical sliders) which color should be loaded after each pause.
 
