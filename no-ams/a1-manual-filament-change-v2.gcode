@@ -1,51 +1,99 @@
-; ORIGINAL CODE FROM SYSTEM PRESET
-;===== A1 20250206 =======================
+; =========================================================================
+; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
+; Version: 2, based on the original AMS version A1 20250206
+; GitHub: https://github.com/avatorl/bambu-a1-g-code/tree/main/no-ams
+; Comments:
+; 	Inline comments are partially AI-generated and may be incorrect
+; 	!!! WARNING !!! EXPERIMETAL VERSION !!! NOT YET TESTED !!!
+; ========================================================================
+
+; initialization
+
 M1007 S0 ; turn off mass estimation
-G392 S0
-M620 S[next_extruder]A
-M204 S9000
-G1 Z{max_layer_z + 3.0} F1200
+G392 S0  ; turn off clog detect
+M204 S9000 ; set print acceleration
 
-M400
-M106 P1 S0
-M106 P2 S0
+; lift, move to the right, and cut =======================================
+
+G1 Z{max_layer_z + 3.0} F1200 ; lift nozzle 3mm above highest layer to avoid hitting the print
+
+G1 X260 F20000                            ; Fast move to X=260 at 20000 mm/min (move to right side)
+G1 X278 F400                              ; Slow move to X=278 (move to cutter position)
+G1 X281 E-5 F80                           ; Extrude reverse 5 mm of filament (retract/cut) while moving to X=281
+G1 X260 F6000                             ; Move back to X=260 at moderate speed
+
+M400                                      ; Wait for all moves to finish
+
+; reheat the nozzle ======================================================
+
+M106 P1 S0 ; turn off part cooling fan
+
 {if old_filament_temp > 142 && next_extruder < 255}
-M104 S[old_filament_temp]
+M104 S[old_filament_temp] ; reheat old filament
 {endif}
 
-G1 X267 F18000
+; move to the left =======================================================
 
-{if long_retractions_when_cut[previous_extruder]}
-M620.11 S1 I[previous_extruder] E-{retraction_distances_when_cut[previous_extruder]} F1200
-{else}
-M620.11 S0
-{endif}
-M400
+G1 X-38.2 F18000                          ; Fast move to start of wiper (X=-38.2)
+G1 X-48.2 F3000                           ; Slow move to end of wiper (X=-48.2)
 
-M620.1 E F[old_filament_e_feedrate] T{nozzle_temperature_range_high[previous_extruder]}
-M620.10 A0 F[old_filament_e_feedrate]
-T[next_extruder]
-M620.1 E F[new_filament_e_feedrate] T{nozzle_temperature_range_high[next_extruder]}
-M620.10 A1 F[new_filament_e_feedrate] L[flush_length] H[nozzle_diameter] T[nozzle_temperature_range_high]
+M400                                      ; Wait for moves to finish
 
-G1 Y128 F9000
+; unload ==================================================================
 
-{if next_extruder < 255}
+G1 E-100 F1000                            ; Retract (unload) 100 mm of filament at 1000 mm/min
 
-{if long_retractions_when_cut[previous_extruder]}
-M620.11 S1 I[previous_extruder] E{retraction_distances_when_cut[previous_extruder]} F{old_filament_e_feedrate}
-M628 S1
-G92 E0
-G1 E{retraction_distances_when_cut[previous_extruder]} F[old_filament_e_feedrate]
-M400
-M629 S1
-{else}
-M620.11 S0
-{endif}
+M400                                      ; Wait for retraction to complete
 
-M400
-G92 E0
-M628 S0
+; play sound ==============================================================
+
+M17                                      ; Enable Steppers
+M400 S1                                  ; wait 1 sec
+M1006 S1
+M1006 A0 B0 L100 C37 D10 M100 E37 F10 N100
+M1006 A0 B0 L100 C41 D10 M100 E41 F10 N100
+M1006 A0 B0 L100 C44 D10 M100 E44 F10 N100
+M1006 A0 B10 L100 C0 D10 M100 E0 F10 N100
+M1006 A43 B10 L100 C39 D10 M100 E46 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A0 B0 L100 C39 D10 M100 E43 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A0 B0 L100 C41 D10 M100 E41 F10 N100
+M1006 A0 B0 L100 C44 D10 M100 E44 F10 N100
+M1006 A0 B0 L100 C49 D10 M100 E49 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A44 B10 L100 C39 D10 M100 E48 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A0 B0 L100 C39 D10 M100 E44 F10 N100
+M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
+M1006 A43 B10 L100 C39 D10 M100 E46 F10 N100
+M1006 W
+
+; wait for user ===========================================================
+
+M400 U1                                   ; PAUSE and wait for user interaction
+
+; load new filament =======================================================
+
+M109 S[nozzle_temperature_range_high]     ; Set nozzle temperature and wait until it reaches target
+
+G1 E200 F500                              ; Load filament into nozzle
+
+M400                                      ; Wait for extrusion to complete
+
+; poop ====================================================================
+
+M106 P1 S178                              ; Turn on fan P1 at speed 178 (likely part cooling fan)
+M400 S3                                   ; Wait 3 seconds
+
+G1 X-38.2 F18000                          ; Fast move to start of poop path (X=-38.2)
+G1 X-48.2 F3000                           ; Slow move to end of poop path (X=-48.2) while extruding
+G1 X-38.2 F18000                          ; Repeat fast move to start
+G1 X-48.2 F3000                           ; Repeat slow poop path
+G1 X-38.2 F18000                          ; One more round
+G1 X-48.2 F3000                           ; And another slow extrusion move
+
+M400                                      ; Wait for moves to complete
 
 {if flush_length_1 > 1}
 ; FLUSH_START
@@ -199,9 +247,6 @@ M204 S[initial_layer_acceleration]
 {else}
 M204 S[default_acceleration]
 {endif}
-{else}
-G1 X[x_after_toolchange] Y[y_after_toolchange] Z[z_after_toolchange] F12000
-{endif}
 
 M622.1 S0
 M9833 F{outer_wall_volumetric_speed/2.4} A0.3 ; cali dynamic extrusion compensation
@@ -226,4 +271,6 @@ M623
 M621 S[next_extruder]A
 G392 S0
 
-M1007 S1
+M1007 S1 ; turn on mass estimation
+
+; continue printing ========================================================
