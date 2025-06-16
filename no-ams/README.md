@@ -1,5 +1,7 @@
 # Manual filament change for Bambu Lab A1 without AMS
 
+This method allows multi-color printing without using the AMS. It supports models with multiple colors on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, maps, decorations and so on) or for models where multi-color printing is needed only on the bottom and/or top surfaces (labels, logos). It is not suitable for models that require dozens or hundreds of filament changes.
+
 ## Create Printer Preset
 
 1. In Bambu Studio click this button to edit **printer settings preset**:
@@ -26,8 +28,6 @@
 ![image](https://github.com/user-attachments/assets/89e483ac-0636-4304-848d-033257718826)
 
 2. Start printing a multicolor model with as many filament changes as you're comfortable handling manually.
-
-   This method works well for flat models (e.g., keychains, signs, labels) or for models where multi-color printing is required only on the bottom and/or top surfaces.
 
 4. Wait for the pause. _If "Allow Prompt Sound" is enabled in Print Options, you will be notified of a pause by a sound._
   
