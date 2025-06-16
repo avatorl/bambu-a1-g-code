@@ -28,6 +28,8 @@
 
 There is no need to use the built-in Unload and Load procedures - just pull out, push in, resume printing.
 
+_To investigate: How to enable Flow Dynamics Calibration
+
 ➡️ Option 1: See in the slicer on the "Preview" tab (using the horizontal and vertical sliders) which color should be loaded after each pause.
 
 ➡️ Option 2: Export g-code and search for all M1020 S commands. M1020 S0 - change to filament #1, M1020 S1 - change to filament #2, and so on.
