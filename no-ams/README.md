@@ -28,7 +28,7 @@
 
 There is no need to use the built-in Unload and Load procedures - just pull out, push in, resume printing.
 
-_To investigate: How to enable Flow Dynamics Calibration
+_??? How to enable Flow Dynamics Calibration_
 
 ➡️ Option 1: See in the slicer on the "Preview" tab (using the horizontal and vertical sliders) which color should be loaded after each pause.
 
@@ -36,7 +36,7 @@ _To investigate: How to enable Flow Dynamics Calibration
 
 ![image](https://github.com/user-attachments/assets/4ba6c987-1c45-41ec-b10a-5d344758ebcc)
 
-!!! Re-slicing, even without any changes in printing settings, may change filament change order.
+❗ Re-slicing, even without any changes in printing settings, may change filament change order.
 
 Repeat steps 3-4 for each pause.
 
