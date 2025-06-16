@@ -6,7 +6,13 @@
 
 ![image](https://github.com/user-attachments/assets/cba181f0-c58c-4677-b402-d3094aaf58bf)
 
-2. Copy [a1-manual-filament-change.gcode](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change.gcode) g-code and paste into **Change filament G-code** field of the **Machine gcode** tab (replace any code existing in the field).
+2. Copy g-code and paste into **Change filament G-code** field of the **Machine gcode** tab (replace any code existing in the field).
+
+➡️ G-code version 1 (no flushing, no dynamic flow calibration - fast change): [no-ams/a1-manual-filament-change-v2.gcode](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change.gcode)
+
+➡️ G-code version 2 (flushing, dynamic flow calibration - print quality): [a1-manual-filament-change-v2.gcode](https://github.com/avatorl/bambu-a1-g-code/blob/main/no-ams/a1-manual-filament-change-v2.gcode
+)
+
 
 ![image](https://github.com/user-attachments/assets/06cd59a5-19a9-49f0-94f5-c07c40b21a72)
 
@@ -47,7 +53,3 @@ Repeat steps 3-4 for each pause.
 ❗ I believe the same K-factor (K-factor of the initial filament) is used for all following filaments.
 
 ❗ Re-slicing, even without any changes in printing settings, may change filament change order.
-
----
-
-Original Code and instructions: https://github.com/steven52880/bambu-a1-manual-filamant-change
