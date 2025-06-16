@@ -44,7 +44,7 @@ Repeat steps 3-4 for each pause.
 
 ---
 
-❗ I believe the same K-factor (initial filament) is used for all following filaments.
+❗ I believe the same K-factor (K-factor of the initial filament) is used for all following filaments.
 
 ❗ Re-slicing, even without any changes in printing settings, may change filament change order.
 
