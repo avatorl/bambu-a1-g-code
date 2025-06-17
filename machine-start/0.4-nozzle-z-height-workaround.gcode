@@ -576,17 +576,10 @@ G1 Z0.2
 M1002 gcode_claim_action : 0
 M400
 
-; === AVatorl 2025-04-13 ===
-; === lower/upper the nozzle ===
+;===== for Textured PEI Plate , lower the nozzle as the nozzle was touching topmost of the texture when homing ==
 ;curr_bed_type={curr_bed_type}
-{if curr_bed_type=="Bambu Cool Plate SuperTack"}
-; upper the nozzle 0.08 mm to prevent nozzle digging into the plate
-G29.1 Z{+0.08} ; upper the nozzle 0.08 mm
-{endif}
 {if curr_bed_type=="Textured PEI Plate"}
-; lower the nozzle 0.02 mm as the nozzle was touching topmost of the texture when homing
-; upper the nozzle 0.08 mm to prevent nozzle digging into the plate
-G29.1 Z{+0.06} ; upper the nozzle 0.06 mm (-0.02+0.08) !!! NOT TESTED !!!
+G29.1 Z{-0.02} ; for Textured PEI Plate
 {endif}
 
 M960 S1 P0 ; turn off laser
