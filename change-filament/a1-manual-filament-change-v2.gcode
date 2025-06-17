@@ -92,9 +92,6 @@ G1 X-38.2 F18000                          	; One more round
 G1 X-48.2 F3000                           	; And another slow extrusion move
 M400                                      	; Wait for moves to complete
 
-G1 Y128 F9000
-M400
-
 G92 E0
 M628 S0
 
