@@ -15,10 +15,13 @@ An example of multi-color model printer using this method:
 
 2. Copy g-code and paste into **Change filament G-code** field of the **Machine gcode** tab (replace any code existing in the field).
 
-➡️ [G-code version 1](https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/a1-manual-filament-change-v1.gcode) (no additional flushing, no flow dynamics calibration - faster filament change).
+➡️ [G-code version 2](https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/a1-manual-filament-change-v2.gcode)
 
-➡️ [G-code version 2](https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/a1-manual-filament-change-v2.gcode) (flushing, flow dynamics calibration - higher print quality).
+Supported features:
 
+- flushing (in accordance with _Falshing volumes_ in Bambu Studio)
+- flow dynamics calibration for each new filament (if was enabled before printing)
+- sound notification about pause (if enabled in _Print Options_ in Bambu Studio)
 
 ![image](https://github.com/user-attachments/assets/06cd59a5-19a9-49f0-94f5-c07c40b21a72)
 
