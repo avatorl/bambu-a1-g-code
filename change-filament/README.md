@@ -77,6 +77,10 @@ For example, M1020 S5 means filament #6 (red color) on this screenshot:
 
 ---
 
+Bambu Lab forum post for discussion https://forum.bambulab.com/t/multi-color-printing-on-a1-without-ams-g-code-modification/172930. Or create an issue here.
+
+---
+
 ❗ WARNING! This is unofficial G-code. It is not authorized, endorsed, or supported by Bambu Lab. The author is not responsible for any negative consequences resulting from the use of this code, including but not limited to filament waste, printing task failure, or printer damage.
 
 ❗ There is no public  documentation for Bambu version of g-code, therefore I may be wrong about what the code does and doesn't do, including possibly incorrect comments in the code. Use with caution at your own responsibility.
