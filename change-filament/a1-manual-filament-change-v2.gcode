@@ -69,6 +69,8 @@ M1006 W
 
 ; filament # sound notification
 
+M400 S2                                  ; wait 2 sec
+
 {if next_extruder == 0} ; filament #1
 
 ;
