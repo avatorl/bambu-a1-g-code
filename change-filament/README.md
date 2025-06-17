@@ -15,14 +15,21 @@ An example of multi-color model printer using this method:
 
 2. Copy g-code and paste into **Change filament G-code** field of the **Machine gcode** tab (replace any code existing in the field).
 
-➡️ [G-code version 2](https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/a1-manual-filament-change-v2.gcode)
+[G-code version 2](https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/a1-manual-filament-change-v2.gcode)
 
-Supported features:
+**Supported features:**
 
-- flushing (in accordance with _Falshing volumes_ in Bambu Studio)
-- flow dynamics calibration for each new filament (if was enabled before printing)
-- sound notification about pause (if sound is enabled in _Print Options_ in Bambu Studio)
-- Morse code notification about filament number (if sounds is enabled)
+➡️ Automated filament unload before pause (just pull it out, with no need to use the Unload menu)
+
+➡️ Pause with sound notification (if sound is enabled in _Print Options_ in Bambu Studio)
+
+➡️ Sound notification (Morse code) indicating which filament # should be inserted (if sounds is enabled)
+
+➡️ Automated filament load after pressing Resume Printing (just push the new filament in and press Resume Printing, with no need to use the Load menu)
+
+➡️ Flushing (in accordance with _Falshing volumes_ in Bambu Studio)
+
+➡️ Flow dynamics calibration for each color (_testing required to make sure it really works_)
 
 ![image](https://github.com/user-attachments/assets/06cd59a5-19a9-49f0-94f5-c07c40b21a72)
 
@@ -48,7 +55,7 @@ Repeat steps 3-4 for each pause.
 
 ---
 
-❗ How can I know which color to load?
+❓ How can I know which color to load?
 
 ➡️ Option 1: In the slicer, on the "Preview" tab, use the vertical (layers) and horizontal sliders to see the color printing order.
 
@@ -70,4 +77,6 @@ For example, M1020 S5 means filament #6 (red color) on this screenshot:
 
 ---
 
-❗ WARNING! This is unofficial G-code. It is not authorized, endorsed, or supported by Bambu Lab. The author is not responsible for any negative consequences resulting from the use of this code, including but not limited to filament waste, printing task failure, or printer damage. I may also be wrong about what the code does and doesn't do, including possibly incorrect comments in the code or on this page. Use with caution at your own responsibility.
+❗ WARNING! This is unofficial G-code. It is not authorized, endorsed, or supported by Bambu Lab. The author is not responsible for any negative consequences resulting from the use of this code, including but not limited to filament waste, printing task failure, or printer damage.
+
+❗ There is no public  documentation for Bambu version of g-code, therefore I may be wrong about what the code does and doesn't do, including possibly incorrect comments in the code. Use with caution at your own responsibility.
