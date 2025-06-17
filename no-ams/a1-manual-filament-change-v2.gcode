@@ -12,12 +12,12 @@ M204 S9000 ; set print acceleration
 
 ; lift, move to the right, and cut =======================================
 
-G1 Z{max_layer_z + 3.0} F1200 ; lift nozzle 3mm above highest layer to avoid hitting the print
+G1 Z{max_layer_z + 3.0} F1200                   ; lift nozzle 3mm above highest layer to avoid hitting the print
 
-G1 X260 F20000                            ; Fast move to X=260 at 20000 mm/min (move to right side)
-G1 X278 F400                              ; Slow move to X=278 (move to cutter position)
-G1 X281 E-5 F80                           ; Extrude reverse 5 mm of filament (retract/cut) while moving to X=281
-G1 X260 F6000                             ; Move back to X=260 at moderate speed
+G1 X267 F18000                            ; Fast move to X=267 at 18000 mm/min (move to right side)
+G1 X277 F400                              ; Slow move to X=278 (move to cutter position)
+;;; G1 X278 E-5 F80                           ; Extrude reverse 5 mm of filament (retract/cut) while moving to X=281
+G1 X267 F6000                             ; Move back to X=267 at moderate speed
 
 M400                                      ; Wait for all moves to finish
 
