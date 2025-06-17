@@ -78,6 +78,7 @@ For example, M1020 S5 means filament #6 (red color) on this screenshot:
 ---
 
 Bambu Lab forum post for discussion https://forum.bambulab.com/t/multi-color-printing-on-a1-without-ams-g-code-modification/172930.
+
 Or create an issue here.
 
 ---
