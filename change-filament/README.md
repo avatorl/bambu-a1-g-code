@@ -21,7 +21,8 @@ Supported features:
 
 - flushing (in accordance with _Falshing volumes_ in Bambu Studio)
 - flow dynamics calibration for each new filament (if was enabled before printing)
-- sound notification about pause (if enabled in _Print Options_ in Bambu Studio)
+- sound notification about pause (if sound is enabled in _Print Options_ in Bambu Studio)
+- Morse code notification about filament number (if sounds is enabled)
 
 ![image](https://github.com/user-attachments/assets/06cd59a5-19a9-49f0-94f5-c07c40b21a72)
 
@@ -52,6 +53,12 @@ How can I know which color to load?
 For example, M1020 S5 means filament #6 (red color) on this screenshot:
 
 ![image](https://github.com/user-attachments/assets/4ba6c987-1c45-41ec-b10a-5d344758ebcc)
+
+➡️ Option 3: Listen for Morse code sound 2 seconds after the pause sound notification. Works for up to 9 filaments.
+
+![image](https://github.com/user-attachments/assets/3cf1a09c-a869-49ce-88f5-69145a5a7d32)
+
+![image](https://github.com/user-attachments/assets/3588b2ec-703b-413d-8054-9661f2532e12)
 
 Repeat steps 3-4 for each pause.
 
