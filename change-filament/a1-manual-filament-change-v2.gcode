@@ -44,7 +44,9 @@ G1 E-100 F1000                            ; Retract (unload) 100 mm of filament 
 M400                                      ; Wait for retraction to complete
 
 ; play sound ==============================================================
+; MIDI to g-code: https://wiki.bambulab.com/en/A1-mini/Midi
 
+; pause notification (music)
 M17                                      ; Enable Steppers
 M400 S1                                  ; wait 1 sec
 M1006 S1
@@ -67,13 +69,20 @@ M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
 M1006 A43 B10 L100 C39 D10 M100 E46 F10 N100
 M1006 W
 
-; filament # sound notification
+; filament # sound notification using Morse code https://en.wikipedia.org/wiki/Morse_code
+; Morse code for disgits 0 to 9 is used for the notification (up to 9 filaments)
+;
+; next_extruder == 0 means filament slot (in Bambu Studio) # 1
+; ...
+; next_extruder == 8 means filament slot (in Bambu Studio) # 9
 
-M400 S2                                  ; wait 2 sec
+M400 S2                                  ; wait 2 sec before playing Morse code
+
+; play Morse code ========================================================
 
 {if next_extruder == 0} ; filament #1
 
-	;
+	; .----
 	;music_long: 6
 	M17
 	M400 S1
@@ -106,7 +115,7 @@ M400 S2                                  ; wait 2 sec
 
 {if next_extruder == 1} ; filament #2
 
-	;
+	; ..---
 	;music_long: 5.5
 	M17
 	M400 S1
@@ -137,7 +146,7 @@ M400 S2                                  ; wait 2 sec
 
 {if next_extruder == 2} ; filament #3
 
-	;
+	; ...--
 	;music_long: 5
 	M17
 	M400 S1
@@ -168,7 +177,7 @@ M400 S2                                  ; wait 2 sec
 
 {if next_extruder == 3} ; filament #4
 
-	;
+	; ....-
 	;music_long: 4.5
 	M17
 	M400 S1
@@ -197,7 +206,7 @@ M400 S2                                  ; wait 2 sec
 
 {if next_extruder == 4} ; filament #5
 
-	;
+	; .....
 	;music_long: 4.5
 	M17
 	M400 S1
@@ -226,7 +235,7 @@ M400 S2                                  ; wait 2 sec
 
 {if next_extruder == 5} ; filament #6
 
-	;
+	; -....
 	;music_long: 5
 	M17
 	M400 S1
@@ -257,7 +266,7 @@ M400 S2                                  ; wait 2 sec
 
 {if next_extruder == 6} ; filament #7
 
-	;
+	; --...
 	;music_long: 5.5
 	M17
 	M400 S1
@@ -288,7 +297,7 @@ M400 S2                                  ; wait 2 sec
 
 {if next_extruder == 7} ; filament #8
 
-	;
+	; ---..
 	;music_long: 6
 	M17
 	M400 S1
@@ -321,7 +330,7 @@ M400 S2                                  ; wait 2 sec
 
 {if next_extruder == 8} ; filament #9
 
-	;
+	; ----.
 	;music_long: 6.5
 	M17
 	M400 S1
@@ -577,7 +586,7 @@ M623
 M621 S[next_extruder]A
 G392 S0
 
-M1007 S1
+M1007 S1		; turn on mass estimation
 
 ; continue printing ========================================================
 
