@@ -14,6 +14,7 @@ M204 S9000 ; set print acceleration
 
 G1 Z{max_layer_z + 3.0} F1200                   ; lift nozzle 3mm above highest layer to avoid hitting the print
 
+;G1 X260 F20000 
 G1 X267 F18000                            ; Fast move to X=267 at 18000 mm/min (move to right side)
 G1 X278 F400                              ; Slow move to X=278 (move to cutter position)
 G1 X281 E-5 F80                           ; Extrude reverse 5 mm of filament (retract/cut) while moving to X=281
