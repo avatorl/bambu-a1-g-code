@@ -44,7 +44,11 @@ Supported features:
 
 There is no need to use the built-in Unload and Load procedures - just pull out, push in, resume printing.
 
-How can I know which color to load?
+Repeat steps 3-4 for each pause.
+
+---
+
+❗ How can I know which color to load?
 
 ➡️ Option 1: In the slicer, on the "Preview" tab, use the vertical (layers) and horizontal sliders to see the color printing order.
 
@@ -60,12 +64,10 @@ For example, M1020 S5 means filament #6 (red color) on this screenshot:
 
 ![image](https://github.com/user-attachments/assets/3588b2ec-703b-413d-8054-9661f2532e12)
 
-Repeat steps 3-4 for each pause.
-
 ---
 
 ❗ Re-slicing, even without any changes in printing settings, may change filament change order.
 
 ---
 
-❗WARNING! This is unofficial G-code. It is not authorized, endorsed, or supported by Bambu Lab. The author is not responsible for any negative consequences resulting from the use of this code, including but not limited to filament waste, printing task failure, or printer damage. I may also be wrong about what the code does and doesn't do, including possibly incorrect comments in the code or on this page. Use with caution at your own responsibility.
+❗ WARNING! This is unofficial G-code. It is not authorized, endorsed, or supported by Bambu Lab. The author is not responsible for any negative consequences resulting from the use of this code, including but not limited to filament waste, printing task failure, or printer damage. I may also be wrong about what the code does and doesn't do, including possibly incorrect comments in the code or on this page. Use with caution at your own responsibility.
