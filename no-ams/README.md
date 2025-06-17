@@ -2,6 +2,11 @@
 
 This method allows multi-color printing without using the AMS. It supports models with multiple colors on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, maps, decorations and so on) or for models where multi-color printing (labels, logos) is needed only on the bottom and/or top surfaces. It is not suitable for models that require dozens or hundreds of filament changes.
 
+An example of multi-color model printer using this method:
+
+<img src="https://github.com/user-attachments/assets/435a6253-d006-457c-8e5f-e64e57a1cacc" alt="Description" width="300">
+
+
 ## Create Printer Preset
 
 1. In Bambu Studio click this button to edit **printer settings preset**:
