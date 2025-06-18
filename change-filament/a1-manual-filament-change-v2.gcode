@@ -8,7 +8,6 @@
 
 M1007 S0								; turn off mass estimation
 G392 S0									; turn off clog detect
-M620 S[next_extruder]A
 M204 S9000 								; set print acceleration
 
 ; lift the toolhead
@@ -602,7 +601,6 @@ M622 J1
   M106 P1 S0 
 M623
 
-M621 S[next_extruder]A
 G392 S0
 M1007 S1							;
 
