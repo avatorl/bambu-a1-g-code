@@ -18,6 +18,7 @@ M400                                    ; wait for all moves to finish
 ; reheat the nozzle
 
 M106 P1 S0								; turn off part cooling fan
+M106 P2 S0								; ???
 
 {if old_filament_temp > 142 && next_extruder < 255}
 	M104 S[old_filament_temp]					; restore old filament temperature if above 142°C
