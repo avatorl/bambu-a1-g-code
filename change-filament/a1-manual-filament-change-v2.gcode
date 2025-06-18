@@ -8,6 +8,7 @@
 
 M1007 S0								; turn off mass estimation
 G392 S0									; turn off clog detect
+M620 S[next_extruder]A
 M204 S9000 								; set print acceleration
 
 ; lift the toolhead
@@ -19,7 +20,7 @@ M400                                    ; wait for all moves to finish
 
 M106 P1 S0								; turn off part cooling fan
 
-{if old_filament_temp > 142}
+{if old_filament_temp > 142 && next_extruder < 255}
 	M104 S[old_filament_temp]					; restore old filament temperature if above 142°C
 {endif}
 
@@ -601,8 +602,8 @@ M622 J1
   M106 P1 S0 
 M623
 
+M621 S[next_extruder]A
 G392 S0
-
 M1007 S1							;
 
 ; continue printing ======================================================
