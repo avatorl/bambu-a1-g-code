@@ -5,18 +5,22 @@
 ; ========================================================================
 
 ; initialization
-M1007 S0 ; turn off mass estimation
-G392 S0
-M620 S[next_extruder]A
-M204 S9000
-G1 Z{max_layer_z + 3.0} F1200
+
+M1007 S0								; turn off mass estimation
+G392 S0									; turn off clog detect
+M204 S9000 								; set print acceleration
+
+; lift the toolhead
+
+G1 Z{max_layer_z + 3.0} F1200           ; lift nozzle 3mm above highest layer to avoid hitting the print
+M400                                    ; wait for all moves to finish
 
 ; reheat the nozzle
 
 M106 P1 S0								; turn off part cooling fan
 
 {if old_filament_temp > 142}
-	M104 S[old_filament_temp]							; restore old filament temperature if above 142°C
+	M104 S[old_filament_temp]					; restore old filament temperature if above 142°C
 {endif}
 
 ; cut filament (no AMS) ==================================================
@@ -595,7 +599,6 @@ M622 J1
   M106 P1 S0 
 M623
 
-M621 S[next_extruder]A
 G392 S0
 
 M1007 S1							;
