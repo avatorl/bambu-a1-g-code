@@ -402,14 +402,15 @@ M400                                      	; wait for moves to complete
 G92 E0						; resetting the extruder position
 M628 S0						; ??? unknown
 
-; filament flush =========================================================
-; uses original change filament g-code from Bambu Studio
-; See https://github.com/avatorl/bambu-a1-g-code/issues/6
+; FILAMENT FLUSH =========================================================
+; depending on the required total flush length, the flush is split into 4 stages with purging between them
+; 	to ensure the poop doesn’t get too large
 ; ========================================================================
+
+; stage 1 ================================================================
 
 {if flush_length_1 > 1}
 
-; FLUSH_START
 ; always use highest temperature to flush
 M400
 M1002 set_filament_type:UNKNOWN
@@ -418,7 +419,12 @@ M106 P1 S60
 
 {if flush_length_1 > 23.7}
 
-G1 E23.7 F{old_filament_e_feedrate} ; do not need pulsatile flushing for start part ??? not clear why ???
+; just extrude (flush), do not need pulsatile flushing for fist 23.7 mm
+
+G1 E23.7 F{old_filament_e_feedrate} 
+
+; pulsatile flushing for flush_length_1 above 23.7 mm
+
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
 G1 E{(flush_length_1 - 23.7) * 0.23} F{old_filament_e_feedrate}
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
@@ -429,6 +435,8 @@ G1 E{(flush_length_1 - 23.7) * 0.02} F50
 G1 E{(flush_length_1 - 23.7) * 0.23} F{new_filament_e_feedrate}
 
 {else}
+
+; just extrude (flush), do not need pulsatile flushing for fist 23.7 mm
 
 G1 E{flush_length_1} F{old_filament_e_feedrate}
 
@@ -442,9 +450,10 @@ M1002 set_filament_type:{filament_type[next_extruder]}
 
 {endif}
 
+; wipe and purge if more than 45 mm of filament already extruded on stage 1, and more flushing is required
+
 {if flush_length_1 > 45 && flush_length_2 > 1}
 
-; WIPE
 M400
 M106 P1 S178
 M400 S3
@@ -459,12 +468,13 @@ M106 P1 S0
 
 {endif}
 
-; filament 2 flush =======================================================
+; stage 2 ================================================================
 
 {if flush_length_2 > 1}
 
 M106 P1 S60
-; FLUSH_START
+
+; pulsatile flushing
 G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_2 * 0.02} F50
 G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
@@ -475,15 +485,16 @@ G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_2 * 0.02} F50
 G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_2 * 0.02} F50
-; FLUSH_END
+
 G1 E-[new_retract_length_toolchange] F1800
 G1 E[new_retract_length_toolchange] F300
 
 {endif}
 
+; wipe and purge if more than 45 mm of filament already extruded on stage 2, and more flushing is required
+
 {if flush_length_2 > 45 && flush_length_3 > 1}
 
-; WIPE
 M400
 M106 P1 S178
 M400 S3
@@ -498,12 +509,13 @@ M106 P1 S0
 
 {endif}
 
-; filament 3 flush =======================================================
+; stage 3 ================================================================
 
 {if flush_length_3 > 1}
 
 M106 P1 S60
-; FLUSH_START
+
+; pulsatile flushing
 G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_3 * 0.02} F50
 G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
@@ -514,15 +526,16 @@ G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_3 * 0.02} F50
 G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_3 * 0.02} F50
-; FLUSH_END
+
 G1 E-[new_retract_length_toolchange] F1800
 G1 E[new_retract_length_toolchange] F300
 
 {endif}
 
+; wipe and purge if more than 45 mm of filament already extruded on stage 3, and more flushing is required
+
 {if flush_length_3 > 45 && flush_length_4 > 1}
 
-; WIPE
 M400
 M106 P1 S178
 M400 S3
@@ -537,12 +550,13 @@ M106 P1 S0
 
 {endif}
 
-; filament 4 flush =======================================================
+; stage 4 ================================================================
 
 {if flush_length_4 > 1}
 
 M106 P1 S60
-; FLUSH_START
+
+; pulsatile flushing
 G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_4 * 0.02} F50
 G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
@@ -553,7 +567,6 @@ G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_4 * 0.02} F50
 G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_4 * 0.02} F50
-; FLUSH_END
 
 {endif}
 
@@ -568,7 +581,8 @@ G1 E6 F{new_filament_e_feedrate} 				; compensate for filament spillage during w
 M400
 G92 E0											; resetting the extruder position
 G1 E-[new_retract_length_toolchange] F1800
-; WIPE
+
+; wipe and purge
 M400
 M106 P1 S178
 M400 S3
@@ -591,7 +605,7 @@ M204 S[initial_layer_acceleration]
 M204 S[default_acceleration]
 {endif}
 
-; Flow dynamics calibrtion ??? ===========================================
+; flow dynamics calibrtion ??? ===========================================
 
 M622.1 S0
 M9833 F{outer_wall_volumetric_speed/2.4} A0.3 	; cali dynamic extrusion compensation
