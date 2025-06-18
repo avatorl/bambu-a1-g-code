@@ -569,8 +569,9 @@ G1 X-48.2 F3000
 G1 X-38.2 F18000
 G1 X-48.2 F3000
 M400
+
 G1 Z{max_layer_z + 3.0} F3000
-	M106 P1 S0
+M106 P1 S0
 	
 {if layer_z <= (initial_layer_print_height + 0.001)}
 	M204 S[initial_layer_acceleration]
