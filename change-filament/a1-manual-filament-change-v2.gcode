@@ -385,7 +385,8 @@ G1 X-38.2 F18000                          	; one more round
 G1 X-48.2 F3000                           	; and another slow extrusion move
 M400                                      	; wait for moves to complete
 
-G92 E0										; resetting the extruder position
+G92 E0						; resetting the extruder position
+M628 S0						; ???
 
 ; filament flush =========================================================
 
