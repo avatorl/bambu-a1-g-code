@@ -10,9 +10,6 @@
 ; MIDI to g-code (tool and instructions): https://wiki.bambulab.com/en/A1-mini/Midi
 ; Morse code https://en.wikipedia.org/wiki/Morse_code
 ; ========================================================================
-; See also:
-;  https://wiki.bambulab.com/en/software/bambu-studio/placeholder-list
-; ========================================================================
 
 ; initialization =========================================================
 
@@ -407,7 +404,7 @@ M628 S0						; ??? unknown
 
 ; filament flush =========================================================
 ; uses original change filament g-code from Bambu Studio
-; question: does it work only for 1 to 4 filaments? to be updated for up to 9 filaments
+; See https://github.com/avatorl/bambu-a1-g-code/issues/6
 ; ========================================================================
 
 {if flush_length_1 > 1}
