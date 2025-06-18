@@ -1,25 +1,35 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Version 2, based on the original AMS version A1 20250206 and Version 1
-; GitHub: https://github.com/avatorl/bambu-a1-g-code/tree/main/no-ams
+; Description and Usage Instructions: https://github.com/avatorl/bambu-a1-g-code/tree/main/no-ams
+; =========================================================================
+; This is version 2, based on:
+;	a) Original AMS version A1 20250206 https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/change-filament-original.gcode
+;	b) Version 1 https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/a1-manual-filament-change-v1.gcode
+; ========================================================================
+; Sound notifications created using:
+; MIDI to g-code (tool and instructions): https://wiki.bambulab.com/en/A1-mini/Midi
+; Morse code https://en.wikipedia.org/wiki/Morse_code
+; ========================================================================
+; See also:
+;  https://wiki.bambulab.com/en/software/bambu-studio/placeholder-list
 ; ========================================================================
 
-; initialization
+; initialization =========================================================
 
-G392 S0									; turn off clog detect
+G392 S0									; turn off clog detection
 M204 S9000 								; set print acceleration
 
-; lift the toolhead
+; lift the toolhead ======================================================
 
 G1 Z{max_layer_z + 3.0} F1200           ; lift nozzle 3mm above highest layer to avoid hitting the print
 M400                                    ; wait for all moves to finish
 
-; reheat the nozzle
+; reheat the nozzle ======================================================
 
 M106 P1 S0								; turn off part cooling fan
 
 {if old_filament_temp > 142 && next_extruder < 255}
-M104 S[old_filament_temp]					; restore old filament temperature if above 142°C
+M104 S[old_filament_temp]				; restore old filament temperature (if above 142°C)
 {endif}
 
 ; cut filament (no AMS) ==================================================
@@ -30,7 +40,7 @@ G1 X281 E-5 F80                         ; extrude reverse 5 mm of filament (retr
 G1 X267 F6000                           ; move back to X=267 at moderate speed
 M400                                    ; wait for all moves to finish
 
-; move to the left =======================================================
+; move to the left (purge wiper) =========================================
 
 G1 X-38.2 F18000                        ; fast move to start of wiper (X=-38.2)
 G1 X-48.2 F3000                         ; slow move to end of wiper (X=-48.2)
@@ -38,11 +48,10 @@ M400                                    ; wait for moves to finish
 
 ; unload filament ========================================================
 
-G1 E-100 F1000                            ; retract (unload) 100 mm of filament at 1000 mm/min
-M400                                      ; wait for retraction to complete
+G1 E-100 F1000                          ; retract (unload) 100 mm of filament at 1000 mm/min
+M400                                    ; wait for retraction to complete
 
 ; play sound ==============================================================
-; MIDI to g-code: https://wiki.bambulab.com/en/A1-mini/Midi
 
 ; pause notification (music)
 M17                                      ; enable Steppers
@@ -67,12 +76,14 @@ M1006 A0 B0 L100 C0 D10 M100 E0 F10 N100
 M1006 A43 B10 L100 C39 D10 M100 E46 F10 N100
 M1006 W
 
-; filament # sound notification using Morse code https://en.wikipedia.org/wiki/Morse_code
-; Morse code for disgits 0 to 9 is used for the notification (up to 9 filaments)
+; filament # sound notification using Morse code for digits 1 to 9 =======
 ;
-; next_extruder == 0 means filament slot (in Bambu Studio) # 1
+; next_extruder == 0 means filament #1
 ; ...
-; next_extruder == 8 means filament slot (in Bambu Studio) # 9
+; next_extruder == 8 means filament #9
+;
+; it's possible to print in more than 9 filaments, 
+; 	but there will be no filament # sound notification for filaments #10+
 
 M400 S2                                  ; wait 2 sec before playing Morse code
 
@@ -80,7 +91,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 0} ; filament #1
 
-; .---- (Morse code)
+; .---- (Morse code for 1)
 ;music_long: 6
 M17
 M400 S1
@@ -113,7 +124,7 @@ M1006 W
 
 {if next_extruder == 1} ; filament #2
 
-; ..--- (Morse code)
+; ..--- (Morse code for 2)
 ;music_long: 5.5
 M17
 M400 S1
@@ -144,7 +155,7 @@ M1006 W
 
 {if next_extruder == 2} ; filament #3
 
-; ...-- (Morse code)
+; ...-- (Morse code for 3)
 ;music_long: 5
 M17
 M400 S1
@@ -175,7 +186,7 @@ M1006 W
 
 {if next_extruder == 3} ; filament #4
 
-; ....- (Morse code)
+; ....- (Morse code for 4)
 ;music_long: 4.5
 M17
 M400 S1
@@ -204,7 +215,7 @@ M1006 W
 
 {if next_extruder == 4} ; filament #5
 
-; ..... (Morse code)
+; ..... (Morse code for 5)
 ;music_long: 4.5
 M17
 M400 S1
@@ -233,7 +244,7 @@ M1006 W
 
 {if next_extruder == 5} ; filament #6
 
-; -.... (Morse code)
+; -.... (Morse code for 6)
 ;music_long: 5
 M17
 M400 S1
@@ -264,7 +275,7 @@ M1006 W
 
 {if next_extruder == 6} ; filament #7
 
-; --... (Morse code)
+; --... (Morse code for 7)
 ;music_long: 5.5
 M17
 M400 S1
@@ -295,7 +306,7 @@ M1006 W
 
 {if next_extruder == 7} ; filament #8
 
-; ---.. (Morse code)
+; ---.. (Morse code for 8)
 ;music_long: 6
 M17
 M400 S1
@@ -328,7 +339,7 @@ M1006 W
 
 {if next_extruder == 8} ; filament #9
 
-; ----. (Morse code)
+; ----. (Morse code for 9)
 ;music_long: 6.5
 M17
 M400 S1
@@ -359,9 +370,16 @@ M1006 W
 
 {endif}
 
-; wait for user ===========================================================
+; PAUSE, wait for user ===================================================
 
 M400 U1                                 	; pause (with notification on the screen) and wait for user interaction
+
+; ========================================================================
+; At this point:
+; 	pul out old filament
+; 	push in new filament
+; 	press Resume Printing
+; ========================================================================
 
 ; load new filament =======================================================
 
@@ -385,9 +403,12 @@ G1 X-48.2 F3000                           	; and another slow extrusion move
 M400                                      	; wait for moves to complete
 
 G92 E0						; resetting the extruder position
-M628 S0						; ???
+M628 S0						; ??? unknown
 
 ; filament flush =========================================================
+; uses original change filament g-code from Bambu Studio
+; question: does it work only for 1 to 4 filaments? to be updated for up to 9 filaments
+; ========================================================================
 
 {if flush_length_1 > 1}
 
@@ -400,7 +421,7 @@ M106 P1 S60
 
 {if flush_length_1 > 23.7}
 
-G1 E23.7 F{old_filament_e_feedrate} ; do not need pulsatile flushing for start part
+G1 E23.7 F{old_filament_e_feedrate} ; do not need pulsatile flushing for start part ??? not clear why ???
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
 G1 E{(flush_length_1 - 23.7) * 0.23} F{old_filament_e_feedrate}
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
@@ -424,8 +445,6 @@ M1002 set_filament_type:{filament_type[next_extruder]}
 
 {endif}
 
-; more flush if required =================================================
-
 {if flush_length_1 > 45 && flush_length_2 > 1}
 
 ; WIPE
@@ -443,7 +462,7 @@ M106 P1 S0
 
 {endif}
 
-; more flush if required =================================================
+; filament 2 flush =======================================================
 
 {if flush_length_2 > 1}
 
@@ -465,8 +484,6 @@ G1 E[new_retract_length_toolchange] F300
 
 {endif}
 
-; more flush if required =================================================
-
 {if flush_length_2 > 45 && flush_length_3 > 1}
 
 ; WIPE
@@ -484,7 +501,7 @@ M106 P1 S0
 
 {endif}
 
-; more flush if required =================================================
+; filament 3 flush =======================================================
 
 {if flush_length_3 > 1}
 
@@ -506,8 +523,6 @@ G1 E[new_retract_length_toolchange] F300
 
 {endif}
 
-; more flush if required =================================================
-
 {if flush_length_3 > 45 && flush_length_4 > 1}
 
 ; WIPE
@@ -525,7 +540,7 @@ M106 P1 S0
 
 {endif}
 
-; more flush if required =================================================
+; filament 4 flush =======================================================
 
 {if flush_length_4 > 1}
 
@@ -547,7 +562,7 @@ G1 E{flush_length_4 * 0.02} F50
 
 M629				; ???
 
-; ??? ====================================================================
+; finalizing =============================================================
 
 M400
 M106 P1 S60
@@ -556,6 +571,7 @@ G1 E6 F{new_filament_e_feedrate} 				; compensate for filament spillage during w
 M400
 G92 E0											; resetting the extruder position
 G1 E-[new_retract_length_toolchange] F1800
+; WIPE
 M400
 M106 P1 S178
 M400 S3
@@ -586,8 +602,8 @@ M1002 judge_flag filament_need_cali_flag
 M622 J1
 G92 E0										; resetting the extruder position
 G1 E-[new_retract_length_toolchange] F1800
+; WIPE
 M400
-
 M106 P1 S178
 M400 S4
 G1 X-38.2 F18000
