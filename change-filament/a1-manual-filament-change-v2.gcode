@@ -7,6 +7,7 @@
 ; initialization
 
 G392 S0									; disable clog detection
+M620 S[next_extruder]A
 M204 S9000 								; set high acceleration for faster moves
 
 ; lift the toolhead
@@ -598,6 +599,7 @@ M622 J1
   M106 P1 S0 
 M623
 
+M621 S[next_extruder]A
 G392 S0
 
 ; continue printing ======================================================
