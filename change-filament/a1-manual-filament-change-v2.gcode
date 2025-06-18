@@ -388,7 +388,7 @@ M400                                      	; wait for extrusion to complete
 
 ; wipe and purge =========================================================
 
-M106 P1 S178                              	; turn on part cooling fan at speed 178
+M106 P1 S178                              	; part cooling fan speed
 M400 S3                                   	; wait 3 seconds
 
 G1 X-38.2 F18000                          	; fast move to start of wiper
@@ -402,8 +402,8 @@ M400                                      	; wait for moves to complete
 ; ========================================================================
 
 
-G92 E0						; resetting the extruder position
-M628 S0						; ??? unknown
+G92 E0										; resetting the extruder position
+M628 S0										; ??? unknown
 
 ; FILAMENT FLUSH =========================================================
 ; depending on the required total flush length, the flush is split into 4 stages with purging between them
@@ -417,8 +417,8 @@ M628 S0						; ??? unknown
 ; always use highest temperature to flush
 M400
 M1002 set_filament_type:UNKNOWN
-M109 S[nozzle_temperature_range_high]
-M106 P1 S60
+M109 S[nozzle_temperature_range_high]		; re-heat the nozzle to max temperature
+M106 P1 S60									; part cooling fan speed 60
 
 {if flush_length_1 > 23.7}
 
@@ -458,7 +458,7 @@ M1002 set_filament_type:{filament_type[next_extruder]}
 {if flush_length_1 > 45 && flush_length_2 > 1}
 
 M400
-M106 P1 S178
+M106 P1 S178								; part cooling fan speed
 M400 S3
 G1 X-38.2 F18000
 G1 X-48.2 F3000
@@ -467,7 +467,7 @@ G1 X-48.2 F3000
 G1 X-38.2 F18000
 G1 X-48.2 F3000
 M400
-M106 P1 S0
+M106 P1 S0									; turn off part cooling fan
 
 {endif}
 
@@ -475,7 +475,7 @@ M106 P1 S0
 
 {if flush_length_2 > 1}
 
-M106 P1 S60
+M106 P1 S60									; part cooling fan speed
 
 ; pulsatile flushing
 G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
@@ -499,7 +499,7 @@ G1 E[new_retract_length_toolchange] F300
 {if flush_length_2 > 45 && flush_length_3 > 1}
 
 M400
-M106 P1 S178
+M106 P1 S178								; part cooling fan speed
 M400 S3
 G1 X-38.2 F18000
 G1 X-48.2 F3000
@@ -508,7 +508,7 @@ G1 X-48.2 F3000
 G1 X-38.2 F18000
 G1 X-48.2 F3000
 M400
-M106 P1 S0
+M106 P1 S0									; turn off part cooling fan
 
 {endif}
 
@@ -540,7 +540,7 @@ G1 E[new_retract_length_toolchange] F300
 {if flush_length_3 > 45 && flush_length_4 > 1}
 
 M400
-M106 P1 S178
+M106 P1 S178								; part cooling fan speed
 M400 S3
 G1 X-38.2 F18000
 G1 X-48.2 F3000
@@ -549,7 +549,7 @@ G1 X-48.2 F3000
 G1 X-38.2 F18000
 G1 X-48.2 F3000
 M400
-M106 P1 S0
+M106 P1 S0									; turn off part cooling fan
 
 {endif}
 
@@ -589,7 +589,7 @@ G1 E-[new_retract_length_toolchange] F1800
 
 ; wipe and purge (longer)
 M400
-M106 P1 S178
+M106 P1 S178									; part cooling fan speed
 M400 S3
 G1 X-38.2 F18000
 G1 X-48.2 F3000
@@ -603,7 +603,7 @@ M400
 
 G1 Z{max_layer_z + 3.0} F3000
 
-M106 P1 S0
+M106 P1 S0										; turn off part cooling fan
 
 ; restore acceleration ===================================================
 
@@ -619,11 +619,11 @@ M622.1 S0
 M9833 F{outer_wall_volumetric_speed/2.4} A0.3 	; cali dynamic extrusion compensation
 M1002 judge_flag filament_need_cali_flag
 M622 J1
-G92 E0										; resetting the extruder position
+G92 E0											; resetting the extruder position
 G1 E-[new_retract_length_toolchange] F1800
 ; WIPE
 M400
-M106 P1 S178
+M106 P1 S178									; part cooling fan speed
 M400 S4
 G1 X-38.2 F18000
 G1 X-48.2 F3000
@@ -632,9 +632,9 @@ G1 X-48.2 F3000
 G1 X-38.2 F12000 ;wipe and shake
 G1 X-48.2 F3000
 M400
-M106 P1 S0 
+M106 P1 S0 										; turn off part cooling fan
 M623
 
-G392 S0									; turn off clog detection (Q: why not turn on?)
+G392 S0											; turn off clog detection (Q: why not turn on?)
 
 ; continue printing ======================================================
