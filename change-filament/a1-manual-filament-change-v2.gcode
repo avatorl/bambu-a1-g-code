@@ -17,7 +17,6 @@ M400                                   	; Wait for all moves to finish
 ; reheat the nozzle
 
 M106 P1 S0								; turn off part cooling fan
-M106 P2 S0								; turn off ? fan
 
 {if old_filament_temp > 142}
 	M104 S[old_filament_temp]							; restore old filament temperature if above 142°C
@@ -547,7 +546,7 @@ G92 E0										; resetting the extruder position
 
 M629				; ???
 
-; ========================================================================
+; ??? ====================================================================
 
 M400
 M106 P1 S60
@@ -577,6 +576,8 @@ G1 Z{max_layer_z + 3.0} F3000
 	M204 S[default_acceleration]
 {endif}
 
+; Flow dynamics calibrtion ??? ===========================================
+
 M622.1 S0
 M9833 F{outer_wall_volumetric_speed/2.4} A0.3 	; cali dynamic extrusion compensation
 M1002 judge_flag filament_need_cali_flag
@@ -599,17 +600,4 @@ M623
 
 G392 S0
 
-; removed code (likely doesn't make any sense w/o AMS) comments. --=======
-
-; M1007 						; turn on/off mass estimation
-
-; M620 and M621					; ?
-
-; M620.11, M620.1, M620.10, T[next_extruder]		; AMS controlled filament unload and load
-
-; M628, M629 S1					; M629 not removed
-
-; {if next_extruder < 255} 		; condition removed, it makes no sense to expect more than 255 filaments
-
 ; continue printing ======================================================
-
