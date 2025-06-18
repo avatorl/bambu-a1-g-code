@@ -5,14 +5,11 @@
 ; ========================================================================
 
 ; initialization
-
-G392 S0									; disable clog detection
-M204 S9000 								; set high acceleration for faster moves
-
-; lift the toolhead
-
-G1 Z{max_layer_z + 3.0} F1200           ; lift nozzle 3mm above highest layer to avoid hitting the print
-M400                                   	; Wait for all moves to finish
+M1007 S0 ; turn off mass estimation
+G392 S0
+M620 S[next_extruder]A
+M204 S9000
+G1 Z{max_layer_z + 3.0} F1200
 
 ; reheat the nozzle
 
@@ -598,6 +595,9 @@ M622 J1
   M106 P1 S0 
 M623
 
-G392 S0								;
+M621 S[next_extruder]A
+G392 S0
+
+M1007 S1							;
 
 ; continue printing ======================================================
