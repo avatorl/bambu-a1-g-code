@@ -6,48 +6,47 @@
 
 ; initialization
 
-M1007 S0								; turn off mass estimation
-G392 S0									; turn off clog detect
-M204 S9000 								; set print acceleration
+G392 S0									; disable clog detection
+M204 S9000 								; set high acceleration for faster moves
 
 ; lift the toolhead
 
 G1 Z{max_layer_z + 3.0} F1200           ; lift nozzle 3mm above highest layer to avoid hitting the print
-M400                                    ; wait for all moves to finish
+M400                                   	; Wait for all moves to finish
 
 ; reheat the nozzle
 
-M106 P1 S0
-M106 P2 S0
+M106 P1 S0								; turn off part cooling fan
+M106 P2 S0								; turn off ? fan
 
-{if old_filament_temp > 142 && next_extruder < 255}
-	M104 S[old_filament_temp]
+{if old_filament_temp > 142}
+	M104 S[old_filament_temp]							; restore old filament temperature if above 142°C
 {endif}
 
 ; cut filament (no AMS) ==================================================
 
-G1 X267 F18000                            ; Fast move to X=267 at 18000 mm/min (move to right side)
-G1 X278 F400                              ; Slow move to X=278 (move to cutter position)
-G1 X281 E-5 F80                           ; Extrude reverse 5 mm of filament (retract/cut) while moving to X=281
-G1 X267 F6000                             ; Move back to X=267 at moderate speed
-M400                                      ; Wait for all moves to finish
+G1 X267 F18000                          ; fast move to X=267 (filament cutter position)
+G1 X278 F400                            ; slow move to precise cutter position
+G1 X281 E-5 F80                         ; extrude reverse 5 mm of filament (retract/cut) while moving to X=281
+G1 X267 F6000                           ; move back to X=267 at moderate speed
+M400                                    ; wait for all moves to finish
 
 ; move to the left =======================================================
 
-G1 X-38.2 F18000                          ; Fast move to start of wiper (X=-38.2)
-G1 X-48.2 F3000                           ; Slow move to end of wiper (X=-48.2)
-M400                                      ; Wait for moves to finish
+G1 X-38.2 F18000                        ; fast move to start of wiper (X=-38.2)
+G1 X-48.2 F3000                         ; slow move to end of wiper (X=-48.2)
+M400                                    ; wait for moves to finish
 
-; unload ==================================================================
+; unload filament ========================================================
 
-G1 E-100 F1000                            ; Retract (unload) 100 mm of filament at 1000 mm/min
-M400                                      ; Wait for retraction to complete
+G1 E-100 F1000                            ; retract (unload) 100 mm of filament at 1000 mm/min
+M400                                      ; wait for retraction to complete
 
 ; play sound ==============================================================
 ; MIDI to g-code: https://wiki.bambulab.com/en/A1-mini/Midi
 
 ; pause notification (music)
-M17                                      ; Enable Steppers
+M17                                      ; enable Steppers
 M400 S1                                  ; wait 1 sec
 M1006 S1
 M1006 A0 B0 L100 C37 D10 M100 E37 F10 N100
@@ -82,7 +81,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 0} ; filament #1
 
-	; .----
+	; .---- (Morse code)
 	;music_long: 6
 	M17
 	M400 S1
@@ -115,7 +114,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 1} ; filament #2
 
-	; ..---
+	; ..--- (Morse code)
 	;music_long: 5.5
 	M17
 	M400 S1
@@ -146,7 +145,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 2} ; filament #3
 
-	; ...--
+	; ...-- (Morse code)
 	;music_long: 5
 	M17
 	M400 S1
@@ -177,7 +176,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 3} ; filament #4
 
-	; ....-
+	; ....- (Morse code)
 	;music_long: 4.5
 	M17
 	M400 S1
@@ -206,7 +205,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 4} ; filament #5
 
-	; .....
+	; ..... (Morse code)
 	;music_long: 4.5
 	M17
 	M400 S1
@@ -235,7 +234,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 5} ; filament #6
 
-	; -....
+	; -.... (Morse code)
 	;music_long: 5
 	M17
 	M400 S1
@@ -266,7 +265,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 6} ; filament #7
 
-	; --...
+	; --... (Morse code)
 	;music_long: 5.5
 	M17
 	M400 S1
@@ -297,7 +296,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 7} ; filament #8
 
-	; ---..
+	; ---.. (Morse code)
 	;music_long: 6
 	M17
 	M400 S1
@@ -330,7 +329,7 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 {if next_extruder == 8} ; filament #9
 
-	; ----.
+	; ----. (Morse code)
 	;music_long: 6.5
 	M17
 	M400 S1
@@ -363,31 +362,32 @@ M400 S2                                  ; wait 2 sec before playing Morse code
 
 ; wait for user ===========================================================
 
-M400 U1                                 	; PAUSE and wait for user interaction
+M400 U1                                 	; pause (with notification on the screen) and wait for user interaction
 
 ; load new filament =======================================================
 
-M109 S[nozzle_temperature_range_high]   	; Set nozzle temperature and wait until it reaches target
+M109 S[nozzle_temperature_range_high]   	; set nozzle temperature and wait until it reaches target
 
-G1 E200 F500                            	; Load 200 mm of filament into nozzle at 500 mm/min
+G1 E200 F500                            	; load 200 mm of filament into nozzle at 500 mm/min
 
-M400                                      	; Wait for extrusion to complete
+M400                                      	; wait for extrusion to complete
 
 ; poop ====================================================================
 
-M106 P1 S178                              	; Turn on fan P1 at speed 178 (likely part cooling fan)
-M400 S3                                   	; Wait 3 seconds
+M106 P1 S178                              	; turn on fan P1 at speed 178 (part cooling fan)
+M400 S3                                   	; wait 3 seconds
 
-G1 X-38.2 F18000                          	; Fast move to start of poop path (X=-38.2)
-G1 X-48.2 F3000                           	; Slow move to end of poop path (X=-48.2) while extruding
-G1 X-38.2 F18000                          	; Repeat fast move to start
-G1 X-48.2 F3000                           	; Repeat slow poop path
-G1 X-38.2 F18000                          	; One more round
-G1 X-48.2 F3000                           	; And another slow extrusion move
-M400                                      	; Wait for moves to complete
+G1 X-38.2 F18000                          	; fast move to start of poop path (X=-38.2)
+G1 X-48.2 F3000                           	; slow move to end of poop path (X=-48.2) while extruding
+G1 X-38.2 F18000                          	; repeat fast move to start
+G1 X-48.2 F3000                           	; repeat slow poop path
+G1 X-38.2 F18000                          	; one more round
+G1 X-48.2 F3000                           	; and another slow extrusion move
+M400                                      	; wait for moves to complete
 
-G92 E0
-M628 S0
+G92 E0										; resetting the extruder position
+
+; filament flush =========================================================
 
 {if flush_length_1 > 1}
 
@@ -424,6 +424,8 @@ M628 S0
 	
 {endif}
 
+; more flush if required =================================================
+
 {if flush_length_1 > 45 && flush_length_2 > 1}
 
 	; WIPE
@@ -440,6 +442,8 @@ M628 S0
 	M106 P1 S0
 	
 {endif}
+
+; more flush if required =================================================
 
 {if flush_length_2 > 1}
 
@@ -461,6 +465,8 @@ M628 S0
 	
 {endif}
 
+; more flush if required =================================================
+
 {if flush_length_2 > 45 && flush_length_3 > 1}
 
 	; WIPE
@@ -477,6 +483,8 @@ M628 S0
 	M106 P1 S0
 	
 {endif}
+
+; more flush if required =================================================
 
 {if flush_length_3 > 1}
 
@@ -498,6 +506,8 @@ M628 S0
 	
 {endif}
 
+; more flush if required =================================================
+
 {if flush_length_3 > 45 && flush_length_4 > 1}
 
 	; WIPE
@@ -514,6 +524,8 @@ M628 S0
 	M106 P1 S0
 	
 {endif}
+
+; more flush if required =================================================
 
 {if flush_length_4 > 1}
 
@@ -533,14 +545,16 @@ M628 S0
 
 {endif}
 
-M629
+M629				; ???
+
+; ========================================================================
 
 M400
 M106 P1 S60
 M109 S[new_filament_temp]
-G1 E6 F{new_filament_e_feedrate} ;Compensate for filament spillage during waiting temperature
+G1 E6 F{new_filament_e_feedrate} 				; compensate for filament spillage during waiting temperature
 M400
-G92 E0
+G92 E0											; resetting the extruder position
 G1 E-[new_retract_length_toolchange] F1800
 M400
 M106 P1 S178
@@ -564,10 +578,10 @@ G1 Z{max_layer_z + 3.0} F3000
 {endif}
 
 M622.1 S0
-M9833 F{outer_wall_volumetric_speed/2.4} A0.3 ; cali dynamic extrusion compensation
+M9833 F{outer_wall_volumetric_speed/2.4} A0.3 	; cali dynamic extrusion compensation
 M1002 judge_flag filament_need_cali_flag
 M622 J1
-  G92 E0
+  G92 E0										; resetting the extruder position
   G1 E-[new_retract_length_toolchange] F1800
   M400
   
@@ -583,10 +597,19 @@ M622 J1
   M106 P1 S0 
 M623
 
-M621 S[next_extruder]A
 G392 S0
 
-M1007 S1		; turn on mass estimation
+; removed code (likely doesn't make any sense w/o AMS) comments. --=======
 
-; continue printing ========================================================
+; M1007 						; turn on/off mass estimation
+
+; M620 and M621					; ?
+
+; M620.11, M620.1, M620.10, T[next_extruder]		; AMS controlled filament unload and load
+
+; M628, M629 S1					; M629 not removed
+
+; {if next_extruder < 255} 		; condition removed, it makes no sense to expect more than 255 filaments
+
+; continue printing ======================================================
 
