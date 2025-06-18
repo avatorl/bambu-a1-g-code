@@ -51,7 +51,7 @@ An example of multi-color model printer using this method:
 
 There is no need to use the built-in Unload and Load procedures - just pull out, push in, resume printing.
 
-_Hold the filament between your fingers for a few seconds until you feel that it has been caught by the extruder._
+_Hold the filament between two fingers for a few seconds until you feel that it has been caught by the extruder._
 
 Repeat steps 3-4 for each pause.
 
