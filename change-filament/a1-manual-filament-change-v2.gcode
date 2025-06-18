@@ -14,12 +14,12 @@
 ; initialization =========================================================
 
 G392 S0									; turn off clog detection
-M204 S9000 								; set print acceleration
+M204 S9000								; set print acceleration
 
 ; lift the toolhead ======================================================
 
-G1 Z{max_layer_z + 3.0} F1200           ; lift nozzle 3mm above highest layer to avoid hitting the print
-M400                                    ; wait for all moves to finish
+G1 Z{max_layer_z + 3.0} F1200			; lift nozzle 3mm above highest layer to avoid hitting the print
+M400									; wait for all moves to finish
 
 ; reheat the nozzle ======================================================
 
@@ -29,18 +29,18 @@ M106 P1 S0								; turn off part cooling fan
 M104 S[old_filament_temp]				; restore old filament temperature (if above 142°C)
 {endif}
 
-; cut filament (no AMS) ==================================================
+; cut filament ===========================================================
 
-G1 X267 F18000                          ; fast move to X=267 (filament cutter position)
+G1 X267 F18000                          ; fast move to filament cutter position
 G1 X278 F400                            ; slow move to precise cutter position
-G1 X281 E-5 F80                         ; extrude reverse 5 mm of filament (retract/cut) while moving to X=281
-G1 X267 F6000                           ; move back to X=267 at moderate speed
+G1 X281 E-5 F80                         ; extrude reverse 5 mm of filament while moving to the right (retract/cut)
+G1 X267 F6000                           ; move back to filament cutter position at moderate speed
 M400                                    ; wait for all moves to finish
 
 ; move to the left (purge wiper) =========================================
 
-G1 X-38.2 F18000                        ; fast move to start of wiper (X=-38.2)
-G1 X-48.2 F3000                         ; slow move to end of wiper (X=-48.2)
+G1 X-38.2 F18000                        ; fast move to start of wiper
+G1 X-48.2 F3000                         ; slow move to end of wiper
 M400                                    ; wait for moves to finish
 
 ; unload filament ========================================================
@@ -382,22 +382,25 @@ M400 U1                                 	; pause (with notification on the scree
 
 M109 S[nozzle_temperature_range_high]   	; set nozzle temperature and wait until it reaches target
 
-G1 E23.7 F500                            		; load 23.7 mm of filament into nozzle at 500 mm/min
+G1 E23.7 F500                            	; load 23.7 mm of filament into nozzle at 500 mm/min
 
 M400                                      	; wait for extrusion to complete
 
 ; wipe and purge =========================================================
 
-M106 P1 S178                              	; turn on fan P1 at speed 178 (part cooling fan)
+M106 P1 S178                              	; turn on part cooling fan at speed 178
 M400 S3                                   	; wait 3 seconds
 
-G1 X-38.2 F18000                          	; fast move to start of poop path (X=-38.2)
-G1 X-48.2 F3000                           	; slow move to end of poop path (X=-48.2) while extruding
-G1 X-38.2 F18000                          	; repeat fast move to start
-G1 X-48.2 F3000                           	; repeat slow poop path
-G1 X-38.2 F18000                          	; one more round
-G1 X-48.2 F3000                           	; and another slow extrusion move
+G1 X-38.2 F18000                          	; fast move to start of wiper
+G1 X-48.2 F3000                           	; slow move to end of wiper
+G1 X-38.2 F18000
+G1 X-48.2 F3000
+G1 X-38.2 F18000
+G1 X-48.2 F3000
 M400                                      	; wait for moves to complete
+
+; ========================================================================
+
 
 G92 E0						; resetting the extruder position
 M628 S0						; ??? unknown
@@ -584,7 +587,7 @@ M400
 G92 E0											; resetting the extruder position
 G1 E-[new_retract_length_toolchange] F1800
 
-; wipe and purge
+; wipe and purge (longer)
 M400
 M106 P1 S178
 M400 S3
@@ -594,8 +597,8 @@ G1 X-38.2 F18000
 G1 X-48.2 F3000
 G1 X-38.2 F18000
 G1 X-48.2 F3000
-G1 X-38.2 F18000
-G1 X-48.2 F3000
+G1 X-38.2 F18000								; additional movement
+G1 X-48.2 F3000									; additional movement
 M400
 
 G1 Z{max_layer_z + 3.0} F3000
@@ -632,6 +635,6 @@ M400
 M106 P1 S0 
 M623
 
-G392 S0
+G392 S0									; turn off clog detection (Q: why not turn on?)
 
 ; continue printing ======================================================
