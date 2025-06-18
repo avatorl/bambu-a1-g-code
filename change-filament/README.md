@@ -53,6 +53,8 @@ There is no need to use the built-in Unload and Load procedures - just pull out,
 
 _Hold the filament between two fingers for a few seconds until you feel that it has been caught by the extruder._
 
+_Inserting new filament right after the pause is faster than doing it a bit later, because the nozzle starts cooling down and will need to be reheated later to ensure the filament is properly loaded._
+
 Repeat steps 3-4 for each pause.
 
 ---
