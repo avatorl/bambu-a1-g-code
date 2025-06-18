@@ -7,7 +7,7 @@
 ; initialization
 
 G392 S0									; disable clog detection
-M620 S[next_extruder]A
+M620 S[next_extruder]A							; required. do not remove. likely initiates next_extruder variable (later used for Morse code notification)
 M204 S9000 								; set high acceleration for faster moves
 
 ; lift the toolhead
