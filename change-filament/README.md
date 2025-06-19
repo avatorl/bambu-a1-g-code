@@ -106,7 +106,9 @@ Bambu Lab forum post for discussion https://forum.bambulab.com/t/multi-color-pri
 
 Or [create an issue](https://github.com/avatorl/bambu-a1-g-code/issues/new) here.
 
-I believe Bambu Lab A1 Mini can use the same code with only minor modification. It requires different X coordinates for the filament cutter in the "cut filament" code section.
+I think Bambu Lab A1 Mini can use the same code with only minor modification. It requires different X coordinates for the filament cutter in the "cut filament" code section.
+
+And I believe this code can be modified to use the AMS for the first 4 colors and manual filament changes for any additional colors.
 
 ---
 
