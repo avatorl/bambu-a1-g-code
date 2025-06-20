@@ -2,7 +2,7 @@
 
 ## About
 
-This method allows multi-color printing without using the AMS. It supports 3D models with multiple colors on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, maps, decorations, etc.) or for models where multi-color printing is needed only on the bottom and/or top surfaces. It is not suitable for models that require hundreds of filament changes.
+This method allows multi-color printing without using the AMS. It supports 3D models with multiple colors on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, maps, decorations, etc.), or for models where multi-color printing is needed only on the bottom and/or top surfaces or on the limited number of layers anywhere in the middle of the model.h It is not suitable for models that require hundreds of filament changes.
 
 ### Supported features
 
