@@ -382,7 +382,7 @@ M400 U1                                 	; pause (with notification on the scree
 
 M109 S[nozzle_temperature_range_high]   	; set nozzle temperature and wait until it reaches target
 
-G1 E23.7 F500                            	; load 23.7 mm of filament into nozzle at 500 mm/min
+G1 E45 F500                            	; load 45 mm of filament into nozzle at 500 mm/min
 
 M400                                      	; wait for extrusion to complete
 
