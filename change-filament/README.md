@@ -24,6 +24,10 @@ This method allows multi-color printing without using the AMS. It supports 3D mo
 
 ---
 
+To support this work download, print & boost this model: https://makerworld.com/en/models/1534741-multi-color-without-ams-with-ams-test#profileId-1609872
+
+---
+
 ## Create Printer Preset
 
 1. In Bambu Studio click this button to edit **printer settings preset**:
