@@ -68,7 +68,7 @@ Repeat steps 3-4 for each pause.
 
 ---
 
-**❓ How can I know which color to load?**
+### How can I know which color to load? ###
 
 ➡️ Method 1: In the slicer, on the "Preview" tab, use the vertical (layers) and horizontal sliders to see the color printing order.
 
