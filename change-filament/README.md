@@ -72,9 +72,13 @@ Repeat steps 3-4 for each pause.
 
 ➡️ Method 1: In the slicer, on the "Preview" tab, use the vertical (layers) and horizontal sliders to see the color printing order.
 
-❗ Re-slicing, even without any changes in printing settings, may change filament change order. Don't use this method after re-slicing.
+Video: https://www.dropbox.com/scl/fi/1y2m3sqlcup7jx8yj94jq/bambu-studio_y7a5j4cp37.mp4?rlkey=sbugo0tt46x3f6wi4o6fwvus8&e=1&dl=0
+
+❗ Re-slicing the model, even without any changes to print settings, may alter the filament change order. Avoid this method if the model has already been re-sliced after being sent to the printer.
 
 ➡️ Method 2: Export sliced file, extract and open G-code file and search for all _"M1020 S"_ commands.
+
+Video: https://www.dropbox.com/scl/fi/3z5of3s66da3euobdb601/bambu-studio_YYQJFr1TtI.mp4?rlkey=ml6wx1w285e6ry0jpgcvy4nen&dl=0
 
 _"M1020 S0"_ - change to project filament #1, 
 _"M1020 S1"_ - change to project filament #2, 
@@ -85,7 +89,9 @@ For example, _"M1020 S5"_ inG-code means project filament #6 (red color) on this
 
 ![image](https://github.com/user-attachments/assets/4ba6c987-1c45-41ec-b10a-5d344758ebcc)
 
-❗ Re-slicing, even without any changes to the print settings, may change the filament change order in the G-code. Make sure you exported and printed the same version of the G-code.
+❗ Re-slicing, even without any changes to the print settings, may change the filament change order in the G-code. Make sure you exported and printed the same version of the G-code. Avoid this method if the model has already been re-sliced after being sent to the printer.
+
+❗ "M1020 S" commands appear in G-code only when custom filament change code is used. You won't find this command in the G-code generated with the default printer settings.
 
 ➡️ Method 3: Listen for [Morse code](https://en.wikipedia.org/wiki/Morse_code) sound 2 seconds after the pause sound notification.
 
