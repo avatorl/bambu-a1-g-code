@@ -72,13 +72,13 @@ Repeat steps 3-4 for each pause.
 
 ➡️ Method 1: In the slicer, on the "Preview" tab, use the vertical (layers) and horizontal sliders to see the color printing order.
 
-Video: https://www.dropbox.com/scl/fi/1y2m3sqlcup7jx8yj94jq/bambu-studio_y7a5j4cp37.mp4?rlkey=sbugo0tt46x3f6wi4o6fwvus8&e=1&dl=0
+[Screen Recodring](https://www.dropbox.com/scl/fi/z6gaeb16i7c8jvk20jfyj/bambu-studio_GH1MCBXD56.mp4?rlkey=8znxxgiaz6s3shov7f9dqy1xs&dl=0)
 
 ❗ Re-slicing the model, even without any changes to print settings, may alter the filament change order. Avoid this method if the model has already been re-sliced after being sent to the printer.
 
-➡️ Method 2: Export sliced file, extract and open G-code file and search for all _"M1020 S"_ commands.
+➡️ Method 2: Export the sliced .gcode.3mf file, unzip it (you can simply rename the .3mf extension to .3mf.zip), extract and open the G-code file (located in the Metadata folder inside the .3mf.zip archive), and search for all "M1020 S" commands using Notepad (or preferably Notepad++).
 
-Video: https://www.dropbox.com/scl/fi/3z5of3s66da3euobdb601/bambu-studio_YYQJFr1TtI.mp4?rlkey=ml6wx1w285e6ry0jpgcvy4nen&dl=0
+[Screen Recording](https://www.dropbox.com/scl/fi/3z5of3s66da3euobdb601/bambu-studio_YYQJFr1TtI.mp4?rlkey=ml6wx1w285e6ry0jpgcvy4nen&dl=0)
 
 _"M1020 S0"_ - change to project filament #1, 
 _"M1020 S1"_ - change to project filament #2, 
