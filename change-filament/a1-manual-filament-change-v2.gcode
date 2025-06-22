@@ -26,7 +26,7 @@ M400									; wait for all moves to finish
 M106 P1 S0								; turn off part cooling fan
 
 {if old_filament_temp > 142 && next_extruder < 255}
-M104 S[old_filament_temp]				; restore old filament temperature (if above 142°C)
+M104 S[old_filament_temp]				; restore old filament temperature (if the filament temperature is greater than 142°C - the temperature the printer maintains during print pause)
 {endif}
 
 ; cut filament ===========================================================
