@@ -126,7 +126,9 @@ Corresponding project filaments:
 
 3. Send the printing job for printing.
 
-4. Ignore the "Filament won't be changed" message. The filament will be changed by the custom G-code.
+4. Ignore "The printer won't pause during printing" warning and click **Confirm**. The printer will be paused for filamet changes by the custom G-code.
+
+   ![image](https://github.com/user-attachments/assets/7af60d2b-8eaa-4118-81b6-9c4e492762b5)
 
 ---
 
