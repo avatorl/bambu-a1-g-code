@@ -4,6 +4,8 @@
 
 This method allows multi-color printing without using the AMS. It supports 3D models with multiple colors on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, maps, decorations, etc.), or for models where multi-color printing is needed only on the bottom and/or top surfaces or on the limited number of layers anywhere in the middle of the model. It is not suitable for models that require hundreds of filament changes.
 
+This method also allows the use of a different filament type for the support/raft base and/or the support/raft interface (e.g., a PETG support interface in a PLA print), except when too many filament changes are required for multiple support interfaces across different layers.
+
 ### Supported features
 
 ➡️ Automated filament unload before pause (just pull it out, with no need to use the _Unload_ menu)
@@ -109,6 +111,18 @@ Morse codes (a sequence of dits and dahs) for digits from 1 to 9:
 Corresponding project filaments:
 
 ![image](https://github.com/user-attachments/assets/3588b2ec-703b-413d-8054-9661f2532e12)
+
+---
+
+### Printing support base/interface using different filament type ###
+
+1. Match all filaments (regardless of filament type) with the same external spool.
+
+   ![image](https://github.com/user-attachments/assets/d9f39d6e-acb8-42db-8833-abb9016abe7c)
+
+3. Send the printing job for printing.
+
+4. Ignore the "Filament won't be changed" message. The filament will be changed by the custom G-code.
 
 ---
 
