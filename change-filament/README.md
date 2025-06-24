@@ -116,7 +116,11 @@ Corresponding project filaments:
 
 ### Printing the support/raft base/interface using a different filament type ###
 
-1. Match all filaments (regardless of filament type) with the same external spool.
+1. Select **Filament for Supports**.
+
+   ![image](https://github.com/user-attachments/assets/dc81011d-f891-4204-85e8-2785942b800e)
+
+2. In "Send print job" dialog match all filaments (regardless of filament type) with the same external spool.
 
    ![image](https://github.com/user-attachments/assets/d9f39d6e-acb8-42db-8833-abb9016abe7c)
 
