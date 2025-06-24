@@ -114,7 +114,7 @@ Corresponding project filaments:
 
 ---
 
-### Printing support base/interface using different filament type ###
+### Printing the support/raft base/interface using a different filament type ###
 
 1. Match all filaments (regardless of filament type) with the same external spool.
 
