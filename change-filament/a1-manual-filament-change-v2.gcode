@@ -14,7 +14,7 @@
 ;  This method is not authorized, endorsed, or supported by Bambu Lab. 
 ;  The author is not responsible for any negative consequences resulting from the use of this code, 
 ;    including but not limited to filament waste, printing task failure, or printer damage.
-'  Use with caution at your own responsibility.
+;  Use with caution at your own responsibility.
 ; ========================================================================
 
 ; initialization =========================================================
