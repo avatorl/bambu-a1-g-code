@@ -10,6 +10,12 @@
 ; MIDI to g-code (tool and instructions): https://wiki.bambulab.com/en/A1-mini/Midi
 ; Morse code https://en.wikipedia.org/wiki/Morse_code
 ; ========================================================================
+; WARNING! This file contains unofficial G-code. 
+;  This method is not authorized, endorsed, or supported by Bambu Lab. 
+;  The author is not responsible for any negative consequences resulting from the use of this code, 
+;    including but not limited to filament waste, printing task failure, or printer damage.
+'  Use with caution at your own responsibility.
+; ========================================================================
 
 ; initialization =========================================================
 
