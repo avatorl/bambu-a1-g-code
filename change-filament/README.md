@@ -4,7 +4,7 @@
 
 This method allows multi-color printing without using the AMS. It supports 3D models with multiple colors on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, maps, decorations, etc.), or for models where multi-color printing is needed only on the bottom and/or top surfaces or on the limited number of layers anywhere in the middle of the model. It is not suitable for models that require hundreds of filament changes.
 
-This method also allows the use of a different filament type for the support/raft base and/or the support/raft interface (e.g., a PETG support interface in a PLA print), except when too many filament changes are required for multiple support interfaces across different layers.
+This method also supports multi-material printing and allows the use of a different filament type for the support/raft base and/or the support/raft interface (e.g., a PETG support interface in a PLA print, PLA support interface in a TPU print), except when too many filament changes are required for multiple support interfaces across different layers.
 
 ### Supported features
 
@@ -35,6 +35,8 @@ To support this work download, print & boost this model: https://makerworld.com/
 1. In Bambu Studio click this button to edit **printer settings preset**:
 
 ![image](https://github.com/user-attachments/assets/cba181f0-c58c-4677-b402-d3094aaf58bf)
+
+❗Only for Bambu Lab A1, not compatible with  Bambu Lab A1 Mini
 
 2. Copy [G-code](https://github.com/avatorl/bambu-a1-G-code/blob/main/change-filament/a1-manual-filament-change-v2.gcode) and paste into **Change filament G-code** field of the **Machine gcode** tab (replace any code existing in the field).
 
