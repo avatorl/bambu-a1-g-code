@@ -56,6 +56,12 @@ To support this work download, print & boost this model: https://makerworld.com/
 
 _For example, I printed a model with 6 filaments and 15 filament changes._
 
+**Multi-material printing is possible** (e.g., TPU and PLA, PLA with a PETG support interface, and other variations).
+
+Ignore the alert and just click Confirm. The printer will pause (controlled by custom G-code).
+
+<img width="530" height="206" alt="image" src="https://github.com/user-attachments/assets/8bf7e6aa-3ebe-4bfc-80c7-9205eb662825" />
+
 3. Wait for the pause. _If "Allow Prompt Sound" is enabled in Print Options, you will be notified of a pause by a sound._
   
 4. **Pull out** the filament, **push in** the next filament, click **Resume Printing**.
