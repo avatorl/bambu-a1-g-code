@@ -1,6 +1,6 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Description and Usage Instructions: https://github.com/avatorl/bambu-a1-g-code/tree/main/no-ams
+; Description and Usage Instructions: https://github.com/avatorl/bambu-a1-g-code/tree/main/change-filament
 ; =========================================================================
 ; This is version 2, based on:
 ;	a) Original AMS version A1 20250206 https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/change-filament-original.gcode
@@ -9,12 +9,6 @@
 ; Sound notifications created using:
 ; MIDI to g-code (tool and instructions): https://wiki.bambulab.com/en/A1-mini/Midi
 ; Morse code https://en.wikipedia.org/wiki/Morse_code
-; ========================================================================
-; WARNING! This file contains unofficial G-code. 
-;  This method is not authorized, endorsed, or supported by Bambu Lab. 
-;  The author is not responsible for any negative consequences resulting from the use of this code, 
-;    including but not limited to filament waste, printing task failure, or printer damage.
-;  Use with caution at your own responsibility.
 ; ========================================================================
 
 ; initialization =========================================================
@@ -32,14 +26,14 @@ M400									; wait for all moves to finish
 M106 P1 S0								; turn off part cooling fan
 
 {if old_filament_temp > 142 && next_extruder < 255}
-M104 S[old_filament_temp]				; restore old filament temperature (if the filament temperature is greater than 142°C - the temperature the printer maintains during print pause)
+M104 S[old_filament_temp]				; restore old filament temperature (if above 142°C)
 {endif}
 
 ; cut filament ===========================================================
 
 G1 X267 F18000                          ; fast move to filament cutter position
 G1 X278 F400                            ; slow move to precise cutter position
-G1 X281 E-5 F80                         ; extrude reverse 5 mm of filament while moving to the right (retract/cut)
+G1 X283 E-5 F80                         ; extrude reverse 5 mm of filament while moving to the right (retract/cut)
 G1 X267 F6000                           ; move back to filament cutter position at moderate speed
 M400                                    ; wait for all moves to finish
 
