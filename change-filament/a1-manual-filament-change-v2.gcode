@@ -34,7 +34,7 @@ M104 S[old_filament_temp]				; restore old filament temperature (if above 142°C
 G1 X267 F18000                          ; fast move to filament cutter position
 G1 X278 F400                            ; slow move to precise cutter position
 
-; if getting 'filament cutter stuck' error, try reducing X value a little bit (use 2nd or 3rd row instead of 1st) [2025-07-30]
+; if getting 'filament cutter stuck' error, try reducing X value a little bit (use 2nd or 3rd row instead of 1st) 2025-07-30
 G1 X283 E-5 F80                         ; extrude reverse 5 mm of filament while moving to the right (retract/cut)
 ; G1 X282 E-5 F80                       ; alternative version
 ; G1 X281 E-5 F80                       ; alternative version
@@ -50,6 +50,7 @@ M400                                    ; wait for moves to finish
 
 ; unload filament ========================================================
 
+G1 E5 F500                              ; extrude a bit of filament
 G1 E-100 F1000                          ; retract (unload) 100 mm of filament at 1000 mm/min
 M400                                    ; wait for retraction to complete
 
