@@ -20,7 +20,7 @@ How many manual filament changes is too much? Find out your own limit. This meth
 
 ➡️ **Sound notification** ([Morse code](https://en.wikipedia.org/wiki/Morse_code)) indicates which filament # should be inserted
 
-➡️ Automatic filament load after pressing **Resume Printing** (simply push the new filament in and press Resume Printing **without using the Load menu**)
+➡️ Semi-automatic filament load (simply push the new filament in and press Resume Printing **without using the Load menu**)
 
 ➡️ Filament flushing in accordance with Purging volumes matrix in Bambu Studio.
 
