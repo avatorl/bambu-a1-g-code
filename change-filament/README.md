@@ -2,11 +2,11 @@
 
 ## About
 
-This method allows *multi-color printing* without using the AMS. It supports 3D models with multiple color changes on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, decorations, etc.) or for models where multi-color printing is needed only on the bottom and/or top surfaces (such as boxes with labels) or on a limited number of layers anywhere in the middle of the model. It is not suitable for models that require hundreds of filament changes.
+This method allows **multi-color printing** without using the AMS. It supports 3D models with multiple color changes on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, decorations, etc.) or for models where multi-color printing is needed only on the bottom and/or top surfaces (such as boxes with labels) or on a limited number of layers anywhere in the middle of the model. It is not suitable for models that require hundreds of filament changes.
 
-This method also supports *multi-material printing* (e.g., PLA core inside a TPU model) and allows the use of a different filament type for the support interface (e.g., a PETG support interface in a PLA print, PLA support interface in a TPU print) in cases where the model or support interface is flat and such printing requires only a handful of material changes.
+This method also supports **multi-material printing** (e.g., PLA core inside a TPU model) and allows the use of a different filament type for the support interface (e.g., a PETG support interface in a PLA print, PLA support interface in a TPU print) in cases where the model or support interface is flat and such printing requires only a handful of material changes.
 
-Even if you have AMS, this method may be helpful with *regular TPU* (without using AMS and TPU for AMS).
+Even if you have AMS, this method may be helpful with **regular TPU** (without using AMS and TPU for AMS).
 
 How many manual filament changes is too much? Find out your own limit. This method ensures as little time as possible is needed per manual filament change (pull out, push, resume). You can see in the comments that someone printed a model with 46 color changes.
 
