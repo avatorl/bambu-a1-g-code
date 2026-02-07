@@ -82,8 +82,6 @@ Inserting new filament right after the pause is faster than doing it a bit later
 
 Repeat steps 3-4 for each pause.
 
-_Filament replacement will take less time if done right after a pause. Otherwise, additional time will be required for reheating the nozzle._
-
 ---
 
 ### How can I know which color to load? ###
