@@ -587,12 +587,12 @@ M629				; ???
 M400
 M106 P1 S60
 M109 S[new_filament_temp]
-G1 E6 F{new_filament_e_feedrate} 				; compensate for filament spillage during waiting temperature
+G1 E12 F{new_filament_e_feedrate} 				; compensate for filament spillage during waiting temperature - increased to ensure enough material for cutting
 M400
 G92 E0											; resetting the extruder position
-G1 E-[new_retract_length_toolchange] F1800		; first retraction to cut filament
+G1 E-[new_retract_length_toolchange] F1800		; retraction to cut filament
 
-; wipe and purge (longer) - extended sequence for better cutting
+; wipe and purge (longer)
 M400
 M106 P1 S178									; part cooling fan speed
 M400 S3
@@ -624,8 +624,8 @@ M622.1 S0
 M9833 F{outer_wall_volumetric_speed/2.4} A0.3 	; cali dynamic extrusion compensation
 M1002 judge_flag filament_need_cali_flag
 M622 J1
-G92 E0											; reset extruder position again
-G1 E-[new_retract_length_toolchange] F1800		; second retraction - ensures proper cutting
+G92 E0											; reset extruder position
+G1 E-[new_retract_length_toolchange] F1800		; retracretraction to cut filament
 M400
 
 M106 P1 S178									; part cooling fan speed
