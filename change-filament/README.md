@@ -14,13 +14,13 @@ How many manual filament changes is too much? Find out your own limit. This meth
 
 ➡️ There is no need to add a pause manually in the slicer. A print profile designed for AMS can be used as is.
 
-➡️ Automatic filament unloading before pause (simply pull filament out without using the Unload menu)
+➡️ Automatic filament unloading before pause (simply pull filament out **without using the Unload menu**)
 
 ➡️ Automatic pause with sound notification (if sound is enabled in Print Options in Bambu Studio)
 
-➡️ Sound notification ([Morse code](https://en.wikipedia.org/wiki/Morse_code)) indicates which filament # should be inserted
+➡️ **Sound notification** ([Morse code](https://en.wikipedia.org/wiki/Morse_code)) indicates which filament # should be inserted
 
-➡️ Automatic filament load after pressing Resume Printing (simply push the new filament in and press Resume Printing without using the Load menu)
+➡️ Automatic filament load after pressing **Resume Printing** (simply push the new filament in and press Resume Printing **without using the Load menu**)
 
 ➡️ Filament flushing in accordance with Purging volumes matrix in Bambu Studio.
 
