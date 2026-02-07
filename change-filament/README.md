@@ -2,23 +2,29 @@
 
 ## About
 
-This method allows multi-color printing without using the AMS. It supports 3D models with multiple colors on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, maps, decorations, etc.), or for models where multi-color printing is needed only on the bottom and/or top surfaces or on the limited number of layers anywhere in the middle of the model. It is not suitable for models that require hundreds of filament changes.
+This method allows *multi-color printing* without using the AMS. It supports 3D models with multiple color changes on the same layer. Manual filament replacement is required, so it is practical only for flat models (keychains, signs, labels, decorations, etc.) or for models where multi-color printing is needed only on the bottom and/or top surfaces (such as boxes with labels) or on a limited number of layers anywhere in the middle of the model. It is not suitable for models that require hundreds of filament changes.
 
-This method also supports multi-material printing and allows the use of a different filament type for the support/raft base and/or the support/raft interface (e.g., a PETG support interface in a PLA print, PLA support interface in a TPU print), except when too many filament changes are required for multiple support interfaces across different layers.
+This method also supports *multi-material printing* (e.g., PLA core inside a TPU model) and allows the use of a different filament type for the support interface (e.g., a PETG support interface in a PLA print, PLA support interface in a TPU print) in cases where the model or support interface is flat and such printing requires only a handful of material changes.
+
+Even if you have AMS, this method may be helpful with *regular TPU* (without using AMS and TPU for AMS).
+
+How many manual filament changes is too much? Find out your own limit. This method ensures as little time as possible is needed per manual filament change (pull out, push, resume). You can see in the comments that someone printed a model with 46 color changes.
 
 ### Supported features
 
-➡️ Automated filament unload before pause (just pull it out, with no need to use the _Unload_ menu)
+➡️ There is no need to add a pause manually in the slicer. A print profile designed for AMS can be used as is (just replace the printer profile with this one).
 
-➡️ Pause with sound notification (if sound is enabled in _Print Options_ in Bambu Studio)
+➡️ Automatic filament unloading before pause (simply pull filament out without using the Unload menu)
 
-➡️ Sound notification ([Morse code](https://en.wikipedia.org/wiki/Morse_code)) indicating which filament # should be inserted (if sound is enabled in _Print Options_ in Bambu Studio)
+➡️ Automatic pause with sound notification (if sound is enabled in Print Options in Bambu Studio)
 
-➡️ Automated filament load after pressing Resume Printing (just push the new filament in and press Resume Printing, with no need to use the Load menu)
+➡️ Sound notification ([Morse code](https://en.wikipedia.org/wiki/Morse_code)) indicates which filament # should be inserted
 
-➡️ Flushing (in accordance with _Falshing volumes_ in Bambu Studio)
+➡️ Automatic filament load after pressing Resume Printing (simply push the new filament in and press Resume Printing without using the Load menu)
 
-➡️ Flow dynamics calibration for each color (if enabled before printing) ❗ testing required to make sure it really works
+➡️ Filament flushing in accordance with Purging volumes matrix in Bambu Studio.
+
+➡️ Flow dynamics calibration for each color (if enabled before printing)
 
 ### An example of a multi-color model printed using this method
 
@@ -75,6 +81,8 @@ Hold the filament between two fingers for a few seconds until you feel it has be
 Inserting new filament right after the pause is faster than doing it a bit later, because the nozzle starts cooling down to 142°C and will need to be reheated afterward.
 
 Repeat steps 3-4 for each pause.
+
+_Filament replacement will take less time if done right after a pause. Otherwise, additional time will be required for reheating the nozzle._
 
 ---
 
