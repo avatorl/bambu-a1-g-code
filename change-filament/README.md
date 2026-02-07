@@ -12,7 +12,7 @@ How many manual filament changes is too much? Find out your own limit. This meth
 
 ### Supported features
 
-➡️ There is no need to add a pause manually in the slicer. A print profile designed for AMS can be used as is (just replace the printer profile with this one).
+➡️ There is no need to add a pause manually in the slicer. A print profile designed for AMS can be used as is.
 
 ➡️ Automatic filament unloading before pause (simply pull filament out without using the Unload menu)
 
