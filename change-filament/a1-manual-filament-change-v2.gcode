@@ -40,7 +40,7 @@ G1 X283 E-5 F80                         ; extrude reverse 5 mm of filament while
 ; G1 X282 E-5 F80                       ; alternative version
 ; G1 X281 E-5 F80                       ; alternative version
 
-G1 X267 F6000                           ; move back to filament cutter position at moderate speed
+G1 X267 F6000                           ; move away from cutter at moderate speed
 M400                                    ; wait for all moves to finish
 
 ; move to the left (purge wiper) =========================================
@@ -379,7 +379,7 @@ M400 U1                                 	; pause (with notification on the scree
 
 ; ========================================================================
 ; At this point:
-; 	pul out old filament
+; 	pull out old filament
 ; 	push in new filament
 ; 	press Resume Printing
 ; ========================================================================
@@ -397,11 +397,11 @@ M400                                      	; wait for extrusion to complete
 M106 P1 S178                              	; part cooling fan speed
 M400 S3                                   	; wait 3 seconds
 
-G1 X-38.2 F18000                          	; fast move to start of wiper
-G1 X-48.2 F3000                           	; slow move to end of wiper
-G1 X-38.2 F18000
+G1 X-38.2 F18000                          	; wipe pass 1: fast move to start of wiper
+G1 X-48.2 F3000                           	; wipe pass 1: slow move to end of wiper
+G1 X-38.2 F18000                          	; wipe pass 2
 G1 X-48.2 F3000
-G1 X-38.2 F18000
+G1 X-38.2 F18000                          	; wipe pass 3
 G1 X-48.2 F3000
 M400                                      	; wait for moves to complete
 
@@ -409,7 +409,7 @@ M400                                      	; wait for moves to complete
 
 
 G92 E0										; resetting the extruder position
-M628 S0										; ??? unknown
+M628 S0										; signal filament change start to firmware
 
 ; FILAMENT FLUSH =========================================================
 ; depending on the required total flush length, the flush is split into 4 stages with purging between them
@@ -421,14 +421,14 @@ M628 S0										; ??? unknown
 {if flush_length_1 > 1}
 
 ; always use highest temperature to flush
-M400
-M1002 set_filament_type:UNKNOWN
+M400										; wait for all moves to finish
+M1002 set_filament_type:UNKNOWN				; temporarily set filament type to unknown for flushing
 M109 S[nozzle_temperature_range_high]		; re-heat the nozzle to max temperature
 M106 P1 S60									; part cooling fan speed 60
 
 {if flush_length_1 > 23.7}
 
-; just extrude (flush), do not need pulsatile flushing for fist 23.7 mm
+; just extrude (flush), do not need pulsatile flushing for first 23.7 mm
 
 G1 E23.7 F{old_filament_e_feedrate} 
 
@@ -445,17 +445,17 @@ G1 E{(flush_length_1 - 23.7) * 0.23} F{new_filament_e_feedrate}
 
 {else}
 
-; just extrude (flush), do not need pulsatile flushing for fist 23.7 mm
+; just extrude (flush), do not need pulsatile flushing for first 23.7 mm
 
 G1 E{flush_length_1} F{old_filament_e_feedrate}
 
 {endif}
 
 ; FLUSH_END
-G1 E-[old_retract_length_toolchange] F1800
-G1 E[old_retract_length_toolchange] F300
-M400
-M1002 set_filament_type:{filament_type[next_extruder]}
+G1 E-[old_retract_length_toolchange] F1800	    ; retract filament
+G1 E[old_retract_length_toolchange] F300		; prime filament (push back)
+M400											; wait for moves to finish
+M1002 set_filament_type:{filament_type[next_extruder]}	; set filament type to new filament
 
 {endif}
 
@@ -481,7 +481,7 @@ M106 P1 S0									; turn off part cooling fan
 
 {if flush_length_2 > 1}
 
-M106 P1 S60									; part cooling fan speed
+M106 P1 S60									; part cooling fan speed 60
 
 ; pulsatile flushing
 G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
@@ -495,8 +495,8 @@ G1 E{flush_length_2 * 0.02} F50
 G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_2 * 0.02} F50
 
-G1 E-[new_retract_length_toolchange] F1800
-G1 E[new_retract_length_toolchange] F300
+G1 E-[new_retract_length_toolchange] F1800	; retract filament
+G1 E[new_retract_length_toolchange] F300		; prime filament (push back)
 
 {endif}
 
@@ -522,7 +522,7 @@ M106 P1 S0									; turn off part cooling fan
 
 {if flush_length_3 > 1}
 
-M106 P1 S60
+M106 P1 S60									; part cooling fan speed 60
 
 ; pulsatile flushing
 G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
@@ -536,8 +536,8 @@ G1 E{flush_length_3 * 0.02} F50
 G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
 G1 E{flush_length_3 * 0.02} F50
 
-G1 E-[new_retract_length_toolchange] F1800
-G1 E[new_retract_length_toolchange] F300
+G1 E-[new_retract_length_toolchange] F1800	; retract filament
+G1 E[new_retract_length_toolchange] F300		; prime filament (push back)
 
 {endif}
 
@@ -563,7 +563,7 @@ M106 P1 S0									; turn off part cooling fan
 
 {if flush_length_4 > 1}
 
-M106 P1 S60
+M106 P1 S60									; part cooling fan speed 60
 
 ; pulsatile flushing
 G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
@@ -579,15 +579,15 @@ G1 E{flush_length_4 * 0.02} F50
 
 {endif}
 
-; FLUSHING COMLETE =======================================================
+; FLUSHING COMPLETE ======================================================
 
-M629				; ???
+M629											; signal filament change end to firmware
 
 ; finalizing =============================================================
 
-M400
-M106 P1 S60
-M109 S[new_filament_temp]
+M400											; wait for all moves to finish
+M106 P1 S60									; part cooling fan speed 60
+M109 S[new_filament_temp]					; set nozzle to new filament temperature and wait
 G1 E12 F{new_filament_e_feedrate} 				; compensate for filament spillage during waiting temperature - increased to ensure enough material for cutting
 M400
 G92 E0											; resetting the extruder position
@@ -605,32 +605,32 @@ G1 X-38.2 F18000
 G1 X-48.2 F3000
 G1 X-38.2 F18000								; additional movement
 G1 X-48.2 F3000									; additional movement
-M400
+M400											; wait for moves to complete
 
-G1 Z{max_layer_z + 3.0} F3000
+G1 Z{max_layer_z + 3.0} F3000					; raise nozzle 3mm above highest layer
 
 M106 P1 S0										; turn off part cooling fan
 
 ; restore acceleration ===================================================
 
 {if layer_z <= (initial_layer_print_height + 0.001)}
-M204 S[initial_layer_acceleration]
+M204 S[initial_layer_acceleration]				; restore initial layer acceleration
 {else}
-M204 S[default_acceleration]
+M204 S[default_acceleration]					; restore default acceleration
 {endif}
 
-; flow dynamics calibrtion ??? ===========================================
+; flow dynamics calibration ===============================================
 
-M622.1 S0
-M9833 F{outer_wall_volumetric_speed/2.4} A0.3 	; cali dynamic extrusion compensation
-M1002 judge_flag filament_need_cali_flag
-M622 J1
+M622.1 S0										; prepare to check calibration flag
+M9833 F{outer_wall_volumetric_speed/2.4} A0.3 	; calibrate dynamic extrusion compensation
+M1002 judge_flag filament_need_cali_flag		; check if filament needs flow calibration
+M622 J1											; if calibration flag is set, execute the following
 G92 E0											; reset extruder position
-G1 E-[new_retract_length_toolchange] F1800		; retracretraction to cut filament
-M400
+G1 E-[new_retract_length_toolchange] F1800		; retraction to cut filament
+M400											; wait for moves to finish
 
 M106 P1 S178									; part cooling fan speed
-M400 S4
+M400 S4											; wait 4 seconds
 G1 X-38.2 F18000
 G1 X-48.2 F3000
 G1 X-38.2 F18000 ;wipe and shake
@@ -639,7 +639,7 @@ G1 X-38.2 F12000 ;wipe and shake
 G1 X-48.2 F3000
 M400
 M106 P1 S0 										; turn off part cooling fan
-M623
+M623											; end conditional block
 
 G392 S0											; turn off clog detection (Q: why not turn on?)
 
