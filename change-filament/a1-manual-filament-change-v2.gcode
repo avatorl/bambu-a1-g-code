@@ -1,6 +1,6 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Version 2.2.2 - 2025-07-10
+; Version 2.3.0 - 2025-07-10
 ; =========================================================================
 ; GitHub repository (the most recent version):
 ;   https://raw.githubusercontent.com/avatorl/bambu-a1-g-code/refs/heads/main/change-filament/a1-manual-filament-change-v2.gcode
@@ -34,23 +34,12 @@ M106 P2 S0
 M104 S[old_filament_temp]				; restore old filament temperature (if above 142°C)
 {endif}
 
-; tip shaping + cut filament =============================================
+; cut filament ===========================================================
 
-G1 X267 F18000                          ; fast move to filament cutter area
-
-; tip shaping: retract to relieve pressure and shape filament tip for a clean cut
-G1 E-20 F1200                           ; retract 20mm to relieve pressure for clean tip shape
-M400                                    ; wait for tip shaping to complete
-
-G1 X278 F400                            ; slow move to precise cutter position
-
-; if getting 'filament cutter stuck' error, try reducing X value a little bit (use 2nd or 3rd row instead of 1st)
-
-G1 X283 E-5 F80                         ; retract 5mm while moving to the right (activates cutter blade)
-; G1 X282 E-5 F80                       ; alternative version
-; G1 X281 E-5 F80                       ; alternative version
-
-G1 X267 F6000                           ; move away from cutter at moderate speed
+G1 X257 F18000                          ; fast move to filament cutter area
+G1 X283 F400                            ; slow move to precise cutter position and cut the filament with the cutter
+G1 E-5 F1000                            ; retract 5mm of filament
+G1 X257 F6000                           ; move away from cutter at moderate speed
 M400                                    ; wait for all moves to finish
 
 ; move to the left (purge wiper) =========================================
