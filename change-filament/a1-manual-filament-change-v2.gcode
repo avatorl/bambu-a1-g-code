@@ -1,6 +1,6 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Version 2.2.0 - 2025-07-10
+; Version 2.2.1 - 2025-07-10
 ; =========================================================================
 ; GitHub repository (the most recent version):
 ;   https://raw.githubusercontent.com/avatorl/bambu-a1-g-code/refs/heads/main/change-filament/a1-manual-filament-change-v2.gcode
