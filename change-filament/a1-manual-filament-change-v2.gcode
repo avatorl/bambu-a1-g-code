@@ -1,6 +1,6 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Version 2.1.0 - 2026-02-08
+; Version 2.2.0 - 2025-07-10
 ; =========================================================================
 ; GitHub repository (the most recent version):
 ;   https://raw.githubusercontent.com/avatorl/bambu-a1-g-code/refs/heads/main/change-filament/a1-manual-filament-change-v2.gcode
@@ -437,31 +437,31 @@ M628 S0										; signal filament change start to firmware
 ; always use highest temperature to flush
 M400										; wait for all moves to finish
 M1002 set_filament_type:UNKNOWN				; temporarily set filament type to unknown for flushing
-M109 S[nozzle_temperature_range_high]		; re-heat the nozzle to max temperature
+M109 S[flush_temperatures[next_extruder]]	; re-heat the nozzle to flush temperature
 M106 P1 S60									; part cooling fan speed 60
 
 {if flush_length_1 > 23.7}
 
 ; just extrude (flush), do not need pulsatile flushing for first 23.7 mm
 
-G1 E23.7 F{old_filament_e_feedrate} 
+G1 E23.7 F{flush_volumetric_speeds[previous_extruder]/2.4053*60}
 
 ; pulsatile flushing for flush_length_1 above 23.7 mm
 
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
-G1 E{(flush_length_1 - 23.7) * 0.23} F{old_filament_e_feedrate}
+G1 E{(flush_length_1 - 23.7) * 0.23} F{flush_volumetric_speeds[previous_extruder]/2.4053*60}
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
-G1 E{(flush_length_1 - 23.7) * 0.23} F{new_filament_e_feedrate}
+G1 E{(flush_length_1 - 23.7) * 0.23} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
-G1 E{(flush_length_1 - 23.7) * 0.23} F{new_filament_e_feedrate}
+G1 E{(flush_length_1 - 23.7) * 0.23} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
-G1 E{(flush_length_1 - 23.7) * 0.23} F{new_filament_e_feedrate}
+G1 E{(flush_length_1 - 23.7) * 0.23} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 
 {else}
 
 ; just extrude (flush), do not need pulsatile flushing for first 23.7 mm
 
-G1 E{flush_length_1} F{old_filament_e_feedrate}
+G1 E{flush_length_1} F{flush_volumetric_speeds[previous_extruder]/2.4053*60}
 
 {endif}
 
@@ -498,15 +498,15 @@ M106 P1 S0									; turn off part cooling fan
 M106 P1 S60									; part cooling fan speed 60
 
 ; pulsatile flushing
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
 
 G1 E-[new_retract_length_toolchange] F1800	; retract filament
@@ -539,15 +539,15 @@ M106 P1 S0									; turn off part cooling fan
 M106 P1 S60									; part cooling fan speed 60
 
 ; pulsatile flushing
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
 
 G1 E-[new_retract_length_toolchange] F1800	; retract filament
@@ -580,15 +580,15 @@ M106 P1 S0									; turn off part cooling fan
 M106 P1 S60									; part cooling fan speed 60
 
 ; pulsatile flushing
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
 
 {endif}
@@ -602,7 +602,7 @@ M629											; signal filament change end to firmware
 M400											; wait for all moves to finish
 M106 P1 S60									    ; part cooling fan speed 60
 M109 S[new_filament_temp]					    ; set nozzle to new filament temperature and wait
-G1 E12 F{new_filament_e_feedrate} 				; compensate for filament spillage during waiting temperature - increased to ensure enough material for cutting
+G1 E6 F{flush_volumetric_speeds[next_extruder]/2.4053*60} 	; compensate for filament spillage during waiting temperature
 M400
 G92 E0											; resetting the extruder position
 G1 E-[new_retract_length_toolchange] F1800		; retraction to cut filament
