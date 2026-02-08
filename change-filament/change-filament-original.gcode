@@ -1,4 +1,4 @@
-;===== A1 20250206 =======================
+;===== A1 20251031 =======================
 M1007 S0 ; turn off mass estimation
 G392 S0
 M620 S[next_extruder]A
@@ -21,21 +21,21 @@ M620.11 S0
 {endif}
 M400
 
-M620.1 E F[old_filament_e_feedrate] T{nozzle_temperature_range_high[previous_extruder]}
-M620.10 A0 F[old_filament_e_feedrate]
+M620.1 E F{flush_volumetric_speeds[previous_extruder]/2.4053*60} T{flush_temperatures[previous_extruder]}
+M620.10 A0 F{flush_volumetric_speeds[previous_extruder]/2.4053*60}
 T[next_extruder]
-M620.1 E F[new_filament_e_feedrate] T{nozzle_temperature_range_high[next_extruder]}
-M620.10 A1 F[new_filament_e_feedrate] L[flush_length] H[nozzle_diameter] T[nozzle_temperature_range_high]
+M620.1 E F{flush_volumetric_speeds[next_extruder]/2.4053*60} T{flush_temperatures[next_extruder]}
+M620.10 A1 F{flush_volumetric_speeds[next_extruder]/2.4053*60} L[flush_length] H[nozzle_diameter] T{flush_temperatures[next_extruder]}
 
 G1 Y128 F9000
 
 {if next_extruder < 255}
 
 {if long_retractions_when_cut[previous_extruder]}
-M620.11 S1 I[previous_extruder] E{retraction_distances_when_cut[previous_extruder]} F{old_filament_e_feedrate}
+M620.11 S1 I[previous_extruder] E{retraction_distances_when_cut[previous_extruder]} F{flush_volumetric_speeds[previous_extruder]/2.4053*60}
 M628 S1
 G92 E0
-G1 E{retraction_distances_when_cut[previous_extruder]} F[old_filament_e_feedrate]
+G1 E{retraction_distances_when_cut[previous_extruder]} F{flush_volumetric_speeds[previous_extruder]/2.4053*60}
 M400
 M629 S1
 {else}
@@ -51,20 +51,20 @@ M628 S0
 ; always use highest temperature to flush
 M400
 M1002 set_filament_type:UNKNOWN
-M109 S[nozzle_temperature_range_high]
+M109 S[flush_temperatures[next_extruder]]
 M106 P1 S60
 {if flush_length_1 > 23.7}
-G1 E23.7 F{old_filament_e_feedrate} ; do not need pulsatile flushing for start part
+G1 E23.7 F{flush_volumetric_speeds[previous_extruder]/2.4053*60} ; do not need pulsatile flushing for start part
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
-G1 E{(flush_length_1 - 23.7) * 0.23} F{old_filament_e_feedrate}
+G1 E{(flush_length_1 - 23.7) * 0.23} F{flush_volumetric_speeds[previous_extruder]/2.4053*60}
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
-G1 E{(flush_length_1 - 23.7) * 0.23} F{new_filament_e_feedrate}
+G1 E{(flush_length_1 - 23.7) * 0.23} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
-G1 E{(flush_length_1 - 23.7) * 0.23} F{new_filament_e_feedrate}
+G1 E{(flush_length_1 - 23.7) * 0.23} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{(flush_length_1 - 23.7) * 0.02} F50
-G1 E{(flush_length_1 - 23.7) * 0.23} F{new_filament_e_feedrate}
+G1 E{(flush_length_1 - 23.7) * 0.23} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 {else}
-G1 E{flush_length_1} F{old_filament_e_feedrate}
+G1 E{flush_length_1} F{flush_volumetric_speeds[previous_extruder]/2.4053*60}
 {endif}
 ; FLUSH_END
 G1 E-[old_retract_length_toolchange] F1800
@@ -91,15 +91,15 @@ M106 P1 S0
 {if flush_length_2 > 1}
 M106 P1 S60
 ; FLUSH_START
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
-G1 E{flush_length_2 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_2 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_2 * 0.02} F50
 ; FLUSH_END
 G1 E-[new_retract_length_toolchange] F1800
@@ -124,15 +124,15 @@ M106 P1 S0
 {if flush_length_3 > 1}
 M106 P1 S60
 ; FLUSH_START
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
-G1 E{flush_length_3 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_3 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_3 * 0.02} F50
 ; FLUSH_END
 G1 E-[new_retract_length_toolchange] F1800
@@ -157,15 +157,15 @@ M106 P1 S0
 {if flush_length_4 > 1}
 M106 P1 S60
 ; FLUSH_START
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
-G1 E{flush_length_4 * 0.18} F{new_filament_e_feedrate}
+G1 E{flush_length_4 * 0.18} F{flush_volumetric_speeds[next_extruder]/2.4053*60}
 G1 E{flush_length_4 * 0.02} F50
 ; FLUSH_END
 {endif}
@@ -175,7 +175,7 @@ M629
 M400
 M106 P1 S60
 M109 S[new_filament_temp]
-G1 E6 F{new_filament_e_feedrate} ;Compensate for filament spillage during waiting temperature
+G1 E6 F{flush_volumetric_speeds[next_extruder]/2.4053*60} ;Compensate for filament spillage during waiting temperature
 M400
 G92 E0
 G1 E-[new_retract_length_toolchange] F1800
