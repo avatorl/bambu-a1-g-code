@@ -1,6 +1,6 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Version 2.2.1 - 2025-07-10
+; Version 2.2.2 - 2025-07-10
 ; =========================================================================
 ; GitHub repository (the most recent version):
 ;   https://raw.githubusercontent.com/avatorl/bambu-a1-g-code/refs/heads/main/change-filament/a1-manual-filament-change-v2.gcode
@@ -26,6 +26,7 @@ M400									; wait for all moves to finish
 ; reheat the nozzle ======================================================
 
 M106 P1 S0								; turn off part cooling fan
+M106 P2 S0
 
 {if old_filament_temp > 142 && next_extruder < 255}
 M104 S[old_filament_temp]				; restore old filament temperature (if above 142°C)
@@ -36,11 +37,7 @@ M104 S[old_filament_temp]				; restore old filament temperature (if above 142°C
 G1 X267 F18000                          ; fast move to filament cutter area
 
 ; tip shaping: retract to relieve pressure and shape filament tip for a clean cut
-{if long_retractions_when_cut[previous_extruder]}
-M620.11 S1 I[previous_extruder] E-{retraction_distances_when_cut[previous_extruder]} F1200 ; long retraction for tip shaping (filament-specific)
-{else}
-M620.11 S0                              ; standard retraction (no long retraction needed for this filament)
-{endif}
+G1 E-20 F1200                           ; retract 20mm to relieve pressure for clean tip shape
 M400                                    ; wait for tip shaping to complete
 
 G1 X278 F400                            ; slow move to precise cutter position
