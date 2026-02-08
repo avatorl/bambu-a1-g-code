@@ -6,6 +6,8 @@
 ;   https://raw.githubusercontent.com/avatorl/bambu-a1-g-code/refs/heads/main/change-filament/a1-manual-filament-change-v2.gcode
 ; Description and Usage Instructions:
 ;   https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/README.md
+; MakerWorld model for filament change testing:
+;   https://makerworld.shop/products/3d-printed-bambu-lab-a1-mini-filament-change-tester
 ; ========================================================================
 ; Sound notifications created using:
 ;   MIDI to g-code (tool and instructions): https://wiki.bambulab.com/en/A1-mini/Midi
