@@ -116,7 +116,7 @@ Morse code for digit 2 - change to project filament #2,
 ...,
 Morse code for digit 9 - change to project filament #9.
 
-Morse code notification works for up to 9 filaments. There will be no Morse code sound for filaments #10+.
+❗ Morse code notification works for up to 9 filaments. There will be no Morse code sound for filaments #10+.
 
 Morse codes (a sequence of dits and dahs) for digits from 1 to 9:
 

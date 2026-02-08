@@ -1,18 +1,20 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Description and Usage Instructions: https://github.com/avatorl/bambu-a1-g-code/tree/main/change-filament
+; Version 2.1.0 - 2026-02-08
 ; =========================================================================
-; This is version 2, based on:
-;	a) Original AMS version A1 20250206 https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/change-filament-original.gcode
-;	b) Version 1 https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/a1-manual-filament-change-v1.gcode
+; GitHub repository (the most recent version):
+;   https://raw.githubusercontent.com/avatorl/bambu-a1-g-code/refs/heads/main/change-filament/a1-manual-filament-change-v2.gcode
+; Description and Usage Instructions:
+;   https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/README.md
 ; ========================================================================
 ; Sound notifications created using:
-; MIDI to g-code (tool and instructions): https://wiki.bambulab.com/en/A1-mini/Midi
-; Morse code https://en.wikipedia.org/wiki/Morse_code
+;   MIDI to g-code (tool and instructions): https://wiki.bambulab.com/en/A1-mini/Midi
+;   Morse code https://en.wikipedia.org/wiki/Morse_code
 ; ========================================================================
 
 ; initialization =========================================================
 
+M1007 S0								; turn off mass estimation (prevents false filament runout alerts during change)
 G392 S0									; turn off clog detection
 M204 S9000								; set print acceleration
 
@@ -29,14 +31,23 @@ M106 P1 S0								; turn off part cooling fan
 M104 S[old_filament_temp]				; restore old filament temperature (if above 142°C)
 {endif}
 
-; cut filament ===========================================================
+; tip shaping + cut filament =============================================
 
-G1 X267 F18000                          ; fast move to filament cutter position
+G1 X267 F18000                          ; fast move to filament cutter area
+
+; tip shaping: retract to relieve pressure and shape filament tip for a clean cut
+{if long_retractions_when_cut[previous_extruder]}
+M620.11 S1 I[previous_extruder] E-{retraction_distances_when_cut[previous_extruder]} F1200 ; long retraction for tip shaping (filament-specific)
+{else}
+M620.11 S0                              ; standard retraction (no long retraction needed for this filament)
+{endif}
+M400                                    ; wait for tip shaping to complete
+
 G1 X278 F400                            ; slow move to precise cutter position
 
 ; if getting 'filament cutter stuck' error, try reducing X value a little bit (use 2nd or 3rd row instead of 1st)
 
-G1 X283 E-5 F80                         ; extrude reverse 5 mm of filament while moving to the right (retract/cut)
+G1 X283 E-5 F80                         ; retract 5mm while moving to the right (activates cutter blade)
 ; G1 X282 E-5 F80                       ; alternative version
 ; G1 X281 E-5 F80                       ; alternative version
 
@@ -388,7 +399,10 @@ M400 U1                                 	; pause (with notification on the scree
 
 M109 S[nozzle_temperature_range_high]   	; set nozzle temperature and wait until it reaches target
 
-G1 E45 F500                            	; load 45 mm of filament into nozzle at 500 mm/min
+; slow-fast-slow priming for reliable filament loading
+G1 E10 F200                            	; slow initial load (10mm) - grabs filament and starts feeding
+G1 E25 F500                            	; faster load (25mm) - fills the Bowden path
+G1 E10 F200                            	; slow final load (10mm) - seats filament in the nozzle
 
 M400                                      	; wait for extrusion to complete
 
@@ -586,8 +600,8 @@ M629											; signal filament change end to firmware
 ; finalizing =============================================================
 
 M400											; wait for all moves to finish
-M106 P1 S60									; part cooling fan speed 60
-M109 S[new_filament_temp]					; set nozzle to new filament temperature and wait
+M106 P1 S60									    ; part cooling fan speed 60
+M109 S[new_filament_temp]					    ; set nozzle to new filament temperature and wait
 G1 E12 F{new_filament_e_feedrate} 				; compensate for filament spillage during waiting temperature - increased to ensure enough material for cutting
 M400
 G92 E0											; resetting the extruder position
@@ -641,6 +655,8 @@ M400
 M106 P1 S0 										; turn off part cooling fan
 M623											; end conditional block
 
-G392 S0											; turn off clog detection (Q: why not turn on?)
+G392 S0											; turn off clog detection (remains off - firmware re-enables when normal printing resumes)
+
+M1007 S1										; re-enable mass estimation
 
 ; continue printing ======================================================
