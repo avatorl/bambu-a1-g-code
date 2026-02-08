@@ -44,7 +44,7 @@ To support this work download, print & boost this model: https://makerworld.com/
 
 ❗Only for Bambu Lab A1, not compatible with  Bambu Lab A1 Mini
 
-2. Copy [G-code](https://github.com/avatorl/bambu-a1-G-code/blob/main/change-filament/a1-manual-filament-change-v2.gcode) and paste into **Change filament G-code** field of the **Machine gcode** tab (replace any code existing in the field).
+2. Copy [G-code](https://github.com/avatorl/bambu-a1-G-code/blob/main/change-filament/a1-manual-filament-change-v3.gcode) and paste into **Change filament G-code** field of the **Machine gcode** tab (replace any code existing in the field).
 
 ![image](https://github.com/user-attachments/assets/06cd59a5-19a9-49f0-94f5-c07c40b21a72)
 
