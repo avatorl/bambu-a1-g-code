@@ -1,6 +1,6 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Version 3.0.0 - 2026-02-08
+; Version 3.0.1 - 2026-02-08
 ; =========================================================================
 ; GitHub repository (the most recent version):
 ;   https://raw.githubusercontent.com/avatorl/bambu-a1-g-code/refs/heads/main/change-filament/a1-manual-filament-change-v2.gcode
@@ -49,17 +49,16 @@ G1 X267 F18000                          ; move to the side for filament change
 ; unload filament (custom code ) =========================================
 
 M400                                    ; wait for all moves to finish
-G1 X257 F18000                          ; fast move to filament cutter area
 G1 X283 F400                            ; slow move to precise cutter position and cut the filament with the cutter
 G1 E-5 F1000                            ; retract 5mm of filament
-G1 X257 F6000                           ; move away from cutter at moderate speed
+G1 X267 F6000                           ; move away from cutter at moderate speed
 M400                                    ; wait for all moves to finish
 
 G1 X-38.2 F18000                        ; fast move to start of wiper
 G1 X-48.2 F3000                         ; slow move to end of wiper
 M400                                    ; wait for moves to finish
 
-G1 E-100 F1000                          ; retract (unload) 100 mm of filament at 1000 mm/min
+G1 E-100 F1000                          ; retract 100 mm of filament
 M400                                    ; wait for retraction to complete
 
 ; play pause notification sound (custom code ) ===========================
@@ -382,7 +381,7 @@ M1006 W
 
 ; PAUSE, wait for user ===================================================
 
-M400 U1                                 	; pause (with notification on the screen) and wait for user interaction
+M400 U1                                 	; pause, with notification on the screen, and wait for user interaction
 
 ; ========================================================================
 ; At this point:
@@ -565,7 +564,9 @@ M629
 M400
 M106 P1 S60
 M109 S[new_filament_temp]
-G1 E6 F{flush_volumetric_speeds[next_extruder]/2.4053*60} ;Compensate for filament spillage during waiting temperature
+; G1 E6 F{flush_volumetric_speeds[next_extruder]/2.4053*60} ;Compensate for filament spillage during waiting temperature
+; Changed E6 to E12 because small poop someties is not wiped off correctly
+G1 E12 F{flush_volumetric_speeds[next_extruder]/2.4053*60} ;Compensate for filament spillage during waiting temperature
 M400
 G92 E0
 G1 E-[new_retract_length_toolchange] F1800
@@ -612,7 +613,7 @@ M622 J1
   M106 P1 S0 
 M623
 
-M621 S[next_extruder]A
+; M621 S[next_extruder]A          ; AMS specific command, not needed for manual filament change
 G392 S0
 
 M1007 S1
