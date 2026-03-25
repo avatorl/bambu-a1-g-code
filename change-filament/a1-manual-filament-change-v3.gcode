@@ -1,9 +1,9 @@
 ; =========================================================================
 ; G-code for manual filament change on Bambu Lab A1 3D printer without AMS
-; Version 3.0.0 - 2026-02-08
+; Version 3.0.1 - 2026-03-25
 ; =========================================================================
 ; GitHub repository (the most recent version):
-;   https://raw.githubusercontent.com/avatorl/bambu-a1-g-code/refs/heads/main/change-filament/a1-manual-filament-change-v2.gcode
+;   https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/a1-manual-filament-change-v3.gcode
 ; Description and Usage Instructions:
 ;   https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/README.md
 ; MakerWorld model for filament change testing:
@@ -50,10 +50,18 @@ G1 X267 F18000                          ; move to the side for filament change
 
 M400                                    ; wait for all moves to finish
 G1 X257 F18000                          ; fast move to filament cutter area
+
+M400                                    ; wait until stationary before changing current
+M17 X0.8                                ; change x-axis motor current to assist with stronger filaments
+M400                                    ; wait for change before moving
+
 G1 X283 F400                            ; slow move to precise cutter position and cut the filament with the cutter
 G1 E-5 F1000                            ; retract 5mm of filament
 G1 X257 F6000                           ; move away from cutter at moderate speed
 M400                                    ; wait for all moves to finish
+
+M17 X0.65                               ; reset x-axis motor current
+M400                                    ; wait for change before moving
 
 G1 X-38.2 F18000                        ; fast move to start of wiper
 G1 X-48.2 F3000                         ; slow move to end of wiper
@@ -94,13 +102,9 @@ M1006 W
 ;
 ; it's possible to print in more than 9 filaments, 
 ; 	but there will be no filament # sound notification for filaments #10+
-
 M400 S2                                 ; wait 2 sec before playing Morse code
-
 ; play Morse code for filament number (custom code) ======================
-
 {if next_extruder == 0} ; filament #1
-
 ; .---- (Morse code for 1)
 ;music_long: 6
 M17
@@ -129,11 +133,8 @@ M1006 A0 B50 C0 D50 E0 F50
 M73 P100 R0
 M1006 A37 B100 L53 C37 D100 M69 E37 F100 N31 
 M1006 W
-
 {endif}
-
 {if next_extruder == 1} ; filament #2
-
 ; ..--- (Morse code for 2)
 ;music_long: 5.5
 M17
@@ -160,11 +161,8 @@ M73 P90 R0
 M1006 A0 B50 C0 D50 E0 F50 
 M1006 A37 B100 L53 C37 D100 M69 E37 F100 N31 
 M1006 W
-
 {endif}
-
 {if next_extruder == 2} ; filament #3
-
 ; ...-- (Morse code for 3)
 ;music_long: 5
 M17
@@ -191,11 +189,8 @@ M1006 A0 B50 C0 D50 E0 F50
 M73 P100 R0
 M1006 A37 B100 L53 C37 D100 M69 E37 F100 N31 
 M1006 W
-
 {endif}
-
 {if next_extruder == 3} ; filament #4
-
 ; ....- (Morse code for 4)
 ;music_long: 4.5
 M17
@@ -220,11 +215,8 @@ M73 P88 R0
 M1006 A0 B50 C0 D50 E0 F50 
 M1006 A37 B100 L53 C37 D100 M69 E37 F100 N31 
 M1006 W
-
 {endif}
-
 {if next_extruder == 4} ; filament #5
-
 ; ..... (Morse code for 5)
 ;music_long: 4.5
 M17
@@ -249,11 +241,8 @@ M73 P88 R0
 M1006 A0 B50 C0 D50 E0 F50 
 M1006 A49 B50 L69 C49 D50 M52 E49 F50 N31 
 M1006 W
-
 {endif}
-
 {if next_extruder == 5} ; filament #6
-
 ; -.... (Morse code for 6)
 ;music_long: 5
 M17
@@ -280,11 +269,8 @@ M1006 A0 B50 C0 D50 E0 F50
 M73 P100 R0
 M1006 A49 B50 L69 C49 D50 M52 E49 F50 N31 
 M1006 W
-
 {endif}
-
 {if next_extruder == 6} ; filament #7
-
 ; --... (Morse code for 7)
 ;music_long: 5.5
 M17
@@ -311,11 +297,8 @@ M73 P90 R0
 M1006 A0 B50 C0 D50 E0 F50 
 M1006 A49 B50 L69 C49 D50 M52 E49 F50 N31 
 M1006 W
-
 {endif}
-
 {if next_extruder == 7} ; filament #8
-
 ; ---.. (Morse code for 8)
 ;music_long: 6
 M17
@@ -344,11 +327,8 @@ M1006 A0 B50 C0 D50 E0 F50
 M73 P100 R0
 M1006 A49 B50 L69 C49 D50 M52 E49 F50 N31 
 M1006 W
-
 {endif}
-
 {if next_extruder == 8} ; filament #9
-
 ; ----. (Morse code for 9)
 ;music_long: 6.5
 M17
@@ -377,7 +357,6 @@ M73 P92 R0
 M1006 A0 B50 C0 D50 E0 F50 
 M1006 A49 B50 L69 C49 D50 M52 E49 F50 N31 
 M1006 W
-
 {endif}
 
 ; PAUSE, wait for user ===================================================
@@ -390,6 +369,9 @@ M400 U1                                 	; pause (with notification on the scree
 ; 	push in new filament
 ; 	press Resume Printing
 ; ========================================================================
+
+G28 X                                           ;home the x axis incase motor skipped while cutting
+G1 X-48.2 F3000                                 ;return to end of wiper
 
 ; load new filament ======================================================
 
@@ -410,6 +392,7 @@ G1 X-48.2 F3000
 G1 X-38.2 F18000                          	; wipe pass 3
 G1 X-48.2 F3000
 M400                                      	; wait for moves to complete
+
 
 ; ========================================================================
 
@@ -600,7 +583,7 @@ M622 J1
   G1 E-[new_retract_length_toolchange] F1800
   M400
   
-  M106 P1 S178
+  M106 P1 178
   M400 S4
   G1 X-38.2 F18000
   G1 X-48.2 F3000
